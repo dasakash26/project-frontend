@@ -5,8 +5,6 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true, // remove
-    "strict": true, // remove
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
