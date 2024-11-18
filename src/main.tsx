@@ -1,7 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, createRoutesFromElements, Route,RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import Layout from "./Layout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Search from "./pages/Search.tsx";
@@ -19,7 +24,17 @@ const router = createBrowserRouter(
       <Route path="negotiations" element={<Negotiation />} />
       <Route path="settings" element={<Settings />} />
       <Route path="notifications" element={<Notification />} />
-      <Route path="*" element={<h1 className="h-[100vh] w-[100vw]">Not Found</h1>} />
+      <Route
+        path="*"
+        element={
+          <>
+          <div className=" h-[45rem] w-[75rem] bg-red-800 flex-col justify-center content-center">
+fix
+            <h1 className="font-mono text-white font-extrabold text-3xl">Page Not Found</h1>
+          </div>
+          </>
+        }
+      />
     </Route>
   )
 );
