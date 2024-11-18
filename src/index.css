@@ -2,128 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Colors from the palette */
+    --background: 160 25% 12%; /* Dark green */
+    --foreground: 160 15% 80%; /* Off-white */
+    --card: 160 20% 50%; /* Medium green */
+    --card-foreground: 160 15% 90%; /* Light green */
+    --popover: 160 20% 50%; /* Medium green */
+    --popover-foreground: 160 15% 90%; /* Light green */
+    --primary: 160 15% 40%; /* Medium-dark green */
+    --primary-foreground: 160 15% 90%; /* Light green */
+    --secondary: 160 20% 30%; /* Slightly lighter green */
+    --secondary-foreground: 160 15% 90%; /* Light green */
+    --muted: 160 20% 40%; /* Medium-light green */
+    --muted-foreground: 160 15% 90%; /* Light green */
+    --accent: 140 50% 50%; /* Sweet green */
+    --accent-foreground: 160 15% 90%; /* Light green */
+    --destructive: 0 70% 50%; /* Red */
+    --destructive-foreground: 160 15% 90%; /* Light green */
+    --border: 160 20% 30%; /* Medium-dark green */
+    --input: 160 20% 30%; /* Medium-dark green */
+    --ring: 160 20% 30%; /* Medium-dark green */
+    --chart-1: 160 20% 40%; /* Medium-light green */
+    --chart-2: 140 50% 50%; /* Sweet green */
+    --chart-3: 30 100% 40%; /* Brown */
+    --chart-4: 280 65% 60%; /* Purple */
+    --chart-5: 340 75% 55%; /* Pink */
     --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 160 25% 12%; /* Dark green */
+    --sidebar-foreground: 160 15% 90%; /* Light green */
+    --sidebar-primary: 160 20% 30%; /* Medium-dark green */
+    --sidebar-primary-foreground: 160 15% 90%; /* Light green */
+    --sidebar-accent: 140 50% 50%; /* Sweet green */
+    --sidebar-accent-foreground: 160 15% 90%; /* Light green */
+    --sidebar-border: 160 20% 30%; /* Medium-dark green */
+    --sidebar-ring: 160 20% 30%; /* Medium-dark green */
   }
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 160 30% 10%; /* Darker green */
+    --foreground: 160 20% 90%; /* Very light green */
+    --card: 160 25% 15%; /* Even darker green */
+    --card-foreground: 160 20% 90%; /* Very light green */
+    --popover: 160 25% 15%; /* Even darker green */
+    --popover-foreground: 160 20% 90%; /* Very light green */
+    --primary: 160 20% 90%; /* Very light green */
+    --primary-foreground: 160 30% 10%; /* Dark green */
+    --secondary: 160 25% 20%; /* Darker green */
+    --secondary-foreground: 160 20% 90%; /* Very light green */
+    --muted: 160 25% 20%; /* Darker green */
+    --muted-foreground: 160 20% 90%; /* Very light green */
+    --accent: 140 50% 50%; /* Sweet green */
+    --accent-foreground: 160 20% 90%; /* Very light green */
+    --destructive: 0 50% 30%; /* Dark red */
+    --destructive-foreground: 160 20% 90%; /* Very light green */
+    --border: 160 25% 20%; /* Darker green */
+    --input: 160 25% 20%; /* Darker green */
+    --ring: 160 25% 20%; /* Darker green */
+    --chart-1: 160 25% 20%; /* Darker green */
+    --chart-2: 140 50% 50%; /* Sweet green */
+    --chart-3: 30 100% 40%; /* Brown */
+    --chart-4: 280 65% 60%; /* Purple */
+    --chart-5: 340 75% 55%; /* Pink */
+    --sidebar-background: 160 30% 10%; /* Dark green */
+    --sidebar-foreground: 160 20% 90%; /* Very light green */
+    --sidebar-primary: 160 25% 20%; /* Darker green */
+    --sidebar-primary-foreground: 160 20% 90%; /* Very light green */
+    --sidebar-accent: 140 50% 50%; /* Sweet green */
+    --sidebar-accent-foreground: 160 20% 90%; /* Very light green */
+    --sidebar-border: 160 25% 20%; /* Darker green */
+    --sidebar-ring: 160 25% 20%; /* Darker green */
   }
 }
 
@@ -133,5 +84,11 @@ button:focus-visible {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .hover\:bg-accent:hover {
+    background-color: hsl(140, 50%, 55%); /* Slightly lighter sweet green */
+  }
+  .hover\:text-accent:hover {
+    color: hsl(140, 50%, 55%); /* Slightly lighter sweet green */
   }
 }
