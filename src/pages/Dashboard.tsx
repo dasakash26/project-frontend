@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { GrapeIcon as Grain, User, MapPin, ChevronRight } from 'lucide-react'
+// import { ScrollArea } from "@/components/ui/scroll-area"
+import { GrapeIcon as Grain, MapPin, ChevronRight } from 'lucide-react' //User
 
 export default function FarmerDashboard() {
   const farmerData = {
@@ -17,10 +17,10 @@ export default function FarmerDashboard() {
     { buyerName: "XYZ Foods", crop: "Paddy", priceOffered: "$0.4/kg" },
   ]
 
-  const acceptedOffers = [
-    { buyerName: "DEF Limited", crop: "Mustard", finalPrice: "$0.8/kg" },
-    { buyerName: "GHI Traders", crop: "Potato", finalPrice: "$0.3/kg" },
-  ]
+  // const acceptedOffers = [
+  //   { buyerName: "DEF Limited", crop: "Mustard", finalPrice: "$0.8/kg" },
+  //   { buyerName: "GHI Traders", crop: "Potato", finalPrice: "$0.3/kg" },
+  // ]
 
   const currentHarvest = [
     {
@@ -161,7 +161,7 @@ export default function FarmerDashboard() {
                             <div className="h-2.5 bg-emerald-100 rounded-full overflow-hidden">
                               <div 
                                 className="h-full bg-emerald-600 rounded-full transition-all duration-500 ease-in-out"
-                                style={{ width: `${item.progress}%` }}
+                                //style={{ width: `${item.progress}%` }}
                               />
                             </div>
                             <div className="flex justify-between mt-2">

@@ -27,7 +27,8 @@ const LoginPage = () => {
     }
     else{
       toast({
-        title: "Wrong password!"
+        title: "Wrong password!",
+        description: email
       })
     }
   }

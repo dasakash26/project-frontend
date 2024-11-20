@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
-import { Wheat, FilterIcon, SlidersHorizontal } from 'lucide-react'
+import { Wheat, FilterIcon} from 'lucide-react' //sliderhorizontal
 import { useState } from 'react'
 
 export default function SearchPage() {
