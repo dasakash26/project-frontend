@@ -15,6 +15,7 @@ import Settings from "./pages/Settings.tsx";
 import Notification from "./components/Notification.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
+import SignupPage from "./pages/Signup.tsx";
 
 const App = () => {
     const router = createBrowserRouter(
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="notifications" element={<Notification />} />
           </Route>
           <Route path="login" element = {<LoginPage />} />
+          <Route path="signup" element = {<SignupPage />} />
           <Route path="*" element={<NotFound />}/>
           </>
         )
