@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import axios from "axios"
 
 
 
@@ -22,18 +23,20 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = () => {
+async function createAccount(email: string, password: string){
+          await axios.post("http://localhost:3000/signup", {email, password});
+          toast({
+              title: "Account created",
+            })
+            navigate("/login")
+}
+  const handleSignup = () => {
     if(password === conPassword && password !== "") {
-        toast({
-            title: "Account created",
-            description: email
-          })
-          navigate("/login")
+      createAccount(email, password);
     }
     else{
       toast({
         title: "Passwords don't match",
-        description: email
       })
     }
   }
@@ -83,13 +86,13 @@ const SignupPage = () => {
               </Link> */}
             </div>
             <Input 
-              id="password" 
+              id="conPassword" 
               type="password" 
               onChange={(e) => setConPassword(e.target.value)}
               required 
               />
           </div>
-          <Button onClick= {handleLogin} type="submit" className="w-full">
+          <Button onClick= {handleSignup} type="submit" className="w-full">
             Sign Up
           </Button>
           {/* <Button variant="outline" className="w-full">
