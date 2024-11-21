@@ -22,8 +22,8 @@ const App = () => {
         createRoutesFromElements(
           <>
           <Route path= "/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<Layout />}>   
-            <Route index element={<Dashboard />} />
+          <Route path= "" element={<Layout />}>
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="search" element={<Search />} />
             <Route path="create-offer" element={<CreateOffer />} />
             <Route path="negotiations" element={<Negotiation />} />
