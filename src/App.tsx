@@ -21,6 +21,7 @@ const App = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
           <>
+          {/* Routes are error prone, pay attention */}
           <Route path= "/" element={<LandingPage />} />
           <Route path= "" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
