@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import ProfileDropdown from "./ProfileDropdown";
 import { useState } from "react";
+import Logo from "./Logo";
 
 // Menu items.
 const items = [
@@ -51,16 +52,13 @@ const getLinkClassName = ({ isActive }: { isActive: boolean }) => {
 };
 
 export function AppSidebar() {
-  const [open, setOpen] = useState(true);
   return (
     <Sidebar
       className="bg-white"
       collapsible="icon"
-      // @ts-ignore
-      open={open}
-      onOpenChange={setOpen}
+      variant="sidebar"
     >
-      <div className="flex items-center justify-center h-16 bg-[#224422] text-white"></div>
+      <div className="flex items-center justify-center h-16 bg-[#224422] text-white"><Logo/></div>
       <SidebarContent className="relative">
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
