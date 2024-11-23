@@ -1,34 +1,286 @@
 import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CalendarIcon, ImageIcon, Loader2 } from 'lucide-react';
 
-const CreateOffer = () => {
-  const [offer, setOffer] = useState("");
+export default function CreateOffer() {
+  const [offerDetails, setOfferDetails] = useState({
+    cropName: "",
+    description: "",
+    price: "",
+    duration: "",
+    quantity: "",
+    cropType: "",
+    harvestMonth: "",
+    harvestYear: "",
+    image:  {
+      name: "",
+    },
+    location: "",
+    paymentTerms: "",
+    contactInfo: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setOfferDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setOfferDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      //setOfferDetails((prev) => ({ ...prev, image: e.target.files[0] }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Offer created:", offer);
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log("Submitting offer:", offerDetails);
+    setIsSubmitting(false);
+    // Reset form or navigate to a new page
   };
 
   return (
-    <div className="mt-16 p-5 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-2xl text-gray-800">Create Offer</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={offer}
-          onChange={(e) => setOffer(e.target.value)}
-          className="mt-2 p-2 border border-gray-300 rounded"
-          placeholder="Enter offer details"
-        />
-        <button
-          type="submit"
-          className="mt-2 p-2 bg-blue-500 text-white rounded"
-        >
-          Submit
-        </button>
-      </form>
+    <div className="container mx-auto p-4 pt-20">
+      <Card className="w-full max-w-4xl mx-auto overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-blue-50 z-0"></div>
+        <CardHeader className="relative z-10">
+          <CardTitle className="text-3xl font-bold text-green-800">Create New Offer</CardTitle>
+          <CardDescription className="text-green-600">
+            Fill in the details to create a new crop offer
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="relative z-10">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="cropName" className="text-green-700">Crop Name</Label>
+                <Input
+                  id="cropName"
+                  name="cropName"
+                  value={offerDetails.cropName}
+                  onChange={handleInputChange}
+                  placeholder="Enter crop name"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="cropType" className="text-green-700">Crop Type</Label>
+                <Select
+                  name="cropType"
+                  value={offerDetails.cropType}
+                  onValueChange={(value) => handleSelectChange("cropType", value)}
+                >
+                  <SelectTrigger className="border-green-200 focus:border-green-500">
+                    <SelectValue placeholder="Select crop type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Fruits">Fruits</SelectItem>
+                    <SelectItem value="Vegetables">Vegetables</SelectItem>
+                    <SelectItem value="Cereals">Cereals</SelectItem>
+                    <SelectItem value="Legumes">Legumes</SelectItem>
+                    <SelectItem value="Nuts">Nuts</SelectItem>
+                    <SelectItem value="Oilseeds">Oilseeds</SelectItem>
+                    <SelectItem value="Spices">Spices</SelectItem>
+                    <SelectItem value="Fiber Crops">Fiber Crops</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="price" className="text-green-700">Price (per kg)</Label>
+                <Input
+                  id="price"
+                  name="price"
+                  type="number"
+                  value={offerDetails.price}
+                  onChange={handleInputChange}
+                  placeholder="Enter price"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="quantity" className="text-green-700">Available Quantity (kg)</Label>
+                <Input
+                  id="quantity"
+                  name="quantity"
+                  type="number"
+                  value={offerDetails.quantity}
+                  onChange={handleInputChange}
+                  placeholder="Enter available quantity"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="harvestMonth" className="text-green-700">Harvest Time</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  <Select
+                    name="harvestMonth"
+                    value={offerDetails.harvestMonth}
+                    onValueChange={(value) => handleSelectChange("harvestMonth", value)}
+                  >
+                    <SelectTrigger className="border-green-200 focus:border-green-500">
+                      <SelectValue placeholder="Month" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month) => (
+                        <SelectItem key={month} value={month}>{month}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Select
+                    name="harvestYear"
+                    value={offerDetails.harvestYear}
+                    onValueChange={(value) => handleSelectChange("harvestYear", value)}
+                  >
+                    <SelectTrigger className="border-green-200 focus:border-green-500">
+                      <SelectValue placeholder="Year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[2023, 2024, 2025, 2026, 2027].map((year) => (
+                        <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="duration" className="text-green-700">Offer Duration (days)</Label>
+                <Input
+                  id="duration"
+                  name="duration"
+                  type="number"
+                  value={offerDetails.duration}
+                  onChange={handleInputChange}
+                  placeholder="Enter duration in days"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description" className="text-green-700">Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                value={offerDetails.description}
+                onChange={handleInputChange}
+                placeholder="Describe your offer"
+                required
+                className="h-24 border-green-200 focus:border-green-500"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="location" className="text-green-700">Location</Label>
+                <Input
+                  id="location"
+                  name="location"
+                  value={offerDetails.location}
+                  onChange={handleInputChange}
+                  placeholder="Enter location"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contactInfo" className="text-green-700">Contact Information</Label>
+                <Input
+                  id="contactInfo"
+                  name="contactInfo"
+                  value={offerDetails.contactInfo}
+                  onChange={handleInputChange}
+                  placeholder="Enter your phone number or email"
+                  required
+                  className="border-green-200 focus:border-green-500"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="paymentTerms" className="text-green-700">Payment Terms</Label>
+              <Textarea
+                id="paymentTerms"
+                name="paymentTerms"
+                value={offerDetails.paymentTerms}
+                onChange={handleInputChange}
+                placeholder="Describe payment terms"
+                required
+                className="h-24 border-green-200 focus:border-green-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="image" className="text-green-700">Crop Image</Label>
+              <div className="flex items-center space-x-2">
+                <Input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => document.getElementById('image')?.click()}
+                  className="border-green-200 text-green-700 hover:bg-green-50"
+                >
+                  <ImageIcon className="mr-2 h-4 w-4" /> Upload Image
+                </Button>
+                <span className="text-sm text-green-600">
+                  {offerDetails.image ? offerDetails.image.name : 'No file chosen'}
+                </span>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter className="relative z-10">
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Creating Offer...
+              </>
+            ) : (
+              'Create Offer'
+            )}
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
-};
+}
 
-export default CreateOffer;

@@ -50,7 +50,7 @@ export default function FarmerDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] pt-16">
+    <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] mt-16">
       <main className="p-4 md:p-6 space-y-6">
         {/* Farmer Profile Card */}
         <Card className="w-full bg-white/90 shadow-lg hover:shadow-xl transition-all duration-200 border-none">
