@@ -12,6 +12,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import ProfileDropdown from "./ProfileDropdown";
+import { useState } from "react";
 
 // Menu items.
 const items = [
@@ -45,21 +46,28 @@ const items = [
 const getLinkClassName = ({ isActive }: { isActive: boolean }) => {
   return [
     "w-full flex items-center gap-3 p-2 rounded-md transition-colors",
-    isActive ? "bg-green-800 text-white" : "text-gray-500 hover:bg-gray-100"
+    isActive ? "bg-green-800 text-white" : "text-gray-500 hover:bg-gray-100",
   ].join(" ");
 };
 
 export function AppSidebar() {
+  const [open, setOpen] = useState(true);
   return (
-    <Sidebar className="bg-white">
+    <Sidebar
+      className="bg-white"
+      collapsible="icon"
+      // @ts-ignore
+      open={open}
+      onOpenChange={setOpen}
+    >
       <div className="flex items-center justify-center h-16 bg-[#224422] text-white"></div>
       <SidebarContent className="relative">
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu >
               {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="!p-0">
+                <SidebarMenuItem key={item.title} className="!0">
                   <NavLink
                     to={item.url}
                     end={item.url === "/"}
