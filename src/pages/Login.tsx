@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import axios from "axios"
 
 
 
@@ -21,14 +22,17 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = () => {
-    if(password === "1234"){
+  const handleLogin = async () => {
+    try{
+      const res = await axios.post("http://localhost:3000/api/user/login", {email, password})
+      toast({
+        title: res.data.message
+      })
       navigate("/dashboard")
     }
-    else{
+    catch(error: any){
       toast({
-        title: "Wrong password!",
-        description: email
+        title: error.response.data.message
       })
     }
   }

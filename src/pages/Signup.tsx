@@ -18,25 +18,37 @@ import axios from "axios"
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
 
-async function createAccount(email: string, password: string){
-          await axios.post("http://localhost:3000/signup", {email, password});
-          toast({
-              title: "Account created",
-            })
-            navigate("/login")
-}
-  const handleSignup = () => {
+// async function createAccount(email: string, password: string){
+//           const data = await axios.post("http://localhost:3000/signup", {email, password});
+//           toast({
+//               title: data.message
+//             })
+//             navigate("/login")
+// }
+  const handleSignup = async () => {
     if(password === conPassword && password !== "") {
-      createAccount(email, password);
+      try{
+        const res = await axios.post("http://localhost:3000/api/user/register", {name, email, password});
+        toast({
+          title: res.data.message
+        })
+        navigate("/login")
+      }
+      catch(error: any){
+        toast({
+          title: error.response.data.message
+        })
+      }
     }
     else{
       toast({
-        title: "Passwords don't match",
+        title: "Passwords do not match or are empty!"
       })
     }
   }
@@ -53,6 +65,16 @@ async function createAccount(email: string, password: string){
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
+        <div className="grid gap-2">
+            <Label htmlFor="email">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="John Doe"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -74,7 +96,7 @@ async function createAccount(email: string, password: string){
               id="password" 
               type="password" 
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
               />
           </div>
 
