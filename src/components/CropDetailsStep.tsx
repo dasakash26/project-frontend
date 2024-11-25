@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { OfferDetails } from "./utils/types";
 import { Textarea } from "./ui/textarea";
-import { cropTypes } from "../pages/CreateOffer";
+import { cropTypes } from "@/components/utils/consts";
 
 interface CropDetailsStepProps {
   offerDetails: OfferDetails;
@@ -29,10 +29,8 @@ export const CropDetailsStep: React.FC<CropDetailsStepProps> = ({
   const { cropName, cropType, description } = offerDetails;
   return (
     <>
-      <CardHeader className="border-b border-[#2a2f2a]">
-        <CardTitle className="text-2xl font-semibold text-[#9ab88d]">
-          Crop Details
-        </CardTitle>
+      <CardHeader className="border-b">
+        <CardTitle className="text-2xl font-semibold">Crop Details</CardTitle>
       </CardHeader>
       <CardContent className="p-6 space-y-6">
         <form>

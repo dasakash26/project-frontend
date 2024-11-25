@@ -16,7 +16,7 @@ export interface OfferDetails {
   cropType: CropType;              // Specific crop type from defined enum
   harvestTime: Date | null;        // Expected harvest date
   location: string;                // Crop's location
-  OfferDuration: string;           // Duration of the offer
+  offerDuration: string;           // Duration of the offer
   paymentTerms: string;            // Terms for payment
   seasonality?: string;            // Seasonality info (optional)
 }

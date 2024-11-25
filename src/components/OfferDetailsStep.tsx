@@ -26,7 +26,7 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
     quantity,
     harvestTime,
     location,
-    OfferDuration,
+    offerDuration,
     paymentTerms,
   } = offerDetails || {};
 
@@ -89,15 +89,15 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
                 onChange={handleInputChange}
               />
             </div>
-            {/*  OfferDuration */}
+            {/*  offerDuration */}
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="OfferDuration">Offer Duration (Days)</Label>
+              <Label htmlFor="offerDuration">Offer Duration (Days)</Label>
               <Input
                 type="number"
                 placeholder="Enter duration in days"
-                id="OfferDuration"
-                name="OfferDuration"
-                value={OfferDuration}
+                id="offerDuration"
+                name="offerDuration"
+                value={offerDuration}
                 onChange={handleInputChange}
               />
             </div>
