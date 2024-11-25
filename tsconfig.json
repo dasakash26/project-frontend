@@ -9,6 +9,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "allowJs": true
+    "allowJs": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   }
 }

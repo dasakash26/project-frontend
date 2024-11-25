@@ -50,11 +50,11 @@ export default function CreateOffer() {
     setOfferDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      //setOfferDetails((prev) => ({ ...prev, image: e.target.files[0] }));
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     //setOfferDetails((prev) => ({ ...prev, image: e.target.files[0] }));
+  //   }
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -236,7 +236,7 @@ export default function CreateOffer() {
                 className="h-24 border-green-200 focus:border-green-500"
               />
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="image" className="text-green-700">Crop Image</Label>
               <div className="flex items-center space-x-2">
                 <Input
@@ -259,7 +259,7 @@ export default function CreateOffer() {
                   {offerDetails.image ? offerDetails.image.name : 'No file chosen'}
                 </span>
               </div>
-            </div>
+            </div> */}
           </form>
         </CardContent>
         <CardFooter className="relative z-10">
