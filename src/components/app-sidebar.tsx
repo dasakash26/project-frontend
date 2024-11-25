@@ -12,7 +12,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import ProfileDropdown from "./ProfileDropdown";
-import { useState } from "react";
+// import { useState } from "react";
 import Logo from "./Logo";
 
 // Menu items.

@@ -59,6 +59,12 @@ export default function CreateOffer() {
     setOfferDetails((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     //setOfferDetails((prev) => ({ ...prev, image: e.target.files[0] }));
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -133,6 +139,7 @@ export default function CreateOffer() {
                 offerDetails={offerDetails}
                 handleInputChange={handleInputChange}
               />
+
             )}
 
             {/* step:3 */}
@@ -163,6 +170,20 @@ export default function CreateOffer() {
                 </Button>
               ) : (
                 // submit button
+
+            </div>
+            {/* <div className="space-y-2">
+              <Label htmlFor="image" className="text-green-700">Crop Image</Label>
+              <div className="flex items-center space-x-2">
+                <Input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
@@ -180,6 +201,7 @@ export default function CreateOffer() {
                     </>
                   )}
                 </Button>
+
               )}
             </CardFooter>
           )}
@@ -187,5 +209,32 @@ export default function CreateOffer() {
         <Toaster />
       </div>
     </>
+
+                <span className="text-sm text-green-600">
+                  {offerDetails.image ? offerDetails.image.name : 'No file chosen'}
+                </span>
+              </div>
+            </div> */}
+          </form>
+        </CardContent>
+        <CardFooter className="relative z-10">
+          <Button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Creating Offer...
+              </>
+            ) : (
+              'Create Offer'
+            )}
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
