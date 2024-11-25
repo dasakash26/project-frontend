@@ -7,9 +7,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User, SquareChevronUp } from "lucide-react";
 import { SidebarMenuButton } from "./ui/sidebar";
+import { Card } from "./ui/card";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+
 
 function ProfileDropdown() {
   const navigate = useNavigate();
@@ -38,7 +40,8 @@ function ProfileDropdown() {
             <SquareChevronUp className="ml-auto" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
-        <DropdownMenuContent
+        <Card>
+          <DropdownMenuContent
           side="top"
           className="w-[--radix-popper-anchor-width] bg-[#47663B] shadow-lg rounded-lg p-2"
         >
@@ -55,6 +58,7 @@ function ProfileDropdown() {
             <span onClick={handleLogout}>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
+        </Card>
       </DropdownMenu>
     </>
   );
