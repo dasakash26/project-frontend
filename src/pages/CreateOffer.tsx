@@ -76,8 +76,14 @@ export default function CreateOffer() {
         title: "Offer Submitted Successfully",
         description: (
           <div className="mt-2 grid gap-1">
-            <p>Your offer for <span className="font-semibold">{offerDetails.cropName}</span> has been submitted successfully.</p>
-            <p className="text-xs opacity-80">Submitted at: {new Date().toLocaleTimeString()}</p>
+            <p>
+              Your offer for{" "}
+              <span className="font-semibold">{offerDetails.cropName}</span> has
+              been submitted successfully.
+            </p>
+            <p className="text-xs opacity-80">
+              Submitted at: {new Date().toLocaleTimeString()}
+            </p>
             <p className="text-xs mt-2">You can review it in your dashboard.</p>
           </div>
         ),
@@ -139,7 +145,6 @@ export default function CreateOffer() {
                 offerDetails={offerDetails}
                 handleInputChange={handleInputChange}
               />
-
             )}
 
             {/* step:3 */}
@@ -170,71 +175,29 @@ export default function CreateOffer() {
                 </Button>
               ) : (
                 // submit button
-
-            </div>
-            {/* <div className="space-y-2">
-              <Label htmlFor="image" className="text-green-700">Crop Image</Label>
-              <div className="flex items-center space-x-2">
-                <Input
-                  id="image"
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
-
                 <Button
+                  type="submit"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  variant={isSubmitting ? "secondary" : "outline"}
+                  variant={"outline"}
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting...
+                      Submitting
                     </>
                   ) : (
                     <>
                       <Check />
-                      Submit Offer
+                      Submit
                     </>
                   )}
                 </Button>
-
               )}
             </CardFooter>
           )}
         </Card>
-        <Toaster />
       </div>
     </>
-
-                <span className="text-sm text-green-600">
-                  {offerDetails.image ? offerDetails.image.name : 'No file chosen'}
-                </span>
-              </div>
-            </div> */}
-          </form>
-        </CardContent>
-        <CardFooter className="relative z-10">
-          <Button 
-            type="submit" 
-            className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating Offer...
-              </>
-            ) : (
-              'Create Offer'
-            )}
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
   );
 }
