@@ -11,10 +11,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import axios from "axios"
+// import axios from "axios"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
+import api from "@/api/axiosConfig"
 
 const loginSchema = z.object({
     email: z
@@ -44,7 +45,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     const { email, password } = data;
     try{
-      const res = await axios.post("http://localhost:3000/api/user/login", {email, password});
+      const res = await api.post("/api/v1/user/login", {email, password});
       toast({
         title: res.data.message
       })

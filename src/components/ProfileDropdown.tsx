@@ -8,7 +8,8 @@ import {
 import { User, SquareChevronUp } from "lucide-react";
 import { SidebarMenuButton } from "./ui/sidebar";
 import { Card } from "./ui/card";
-import axios from "axios";
+// import axios from "axios";
+import api from "@/api/axiosConfig";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,7 @@ function ProfileDropdown() {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try{
-      await axios.get("http://localhost:3000/api/user/logout")
+      await api.get("/api/v1/user/logout")
       toast({
         title: "Logged out successfully!"
       })
@@ -54,8 +55,8 @@ function ProfileDropdown() {
           <DropdownMenuItem className="p-2 text-white rounded-lg">
             <span>Contracts</span>
           </DropdownMenuItem>
-          <DropdownMenuItem className="p-2  text-white rounded-lg">
-            <span onClick={handleLogout}>Sign out</span>
+          <DropdownMenuItem onClick={handleLogout} className="p-2  text-white rounded-lg">
+            <span>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
         </Card>

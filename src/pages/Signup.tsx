@@ -15,7 +15,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+// import axios from "axios";
+import api from "@/api/axiosConfig";
 
 // Zod Schema for Signup Form
 const signupSchema = z.object({
@@ -29,7 +30,7 @@ const signupSchema = z.object({
     .min(1, "Password must be at least 1 characters long"),
   confirmPassword: z
     .string(),
-  userType: z.enum(['farmer', 'buyer'], {
+  userType: z.enum(['FARMER', 'BUYER'], {
       required_error: 'Please select a user type',
   })
 }).refine(
@@ -60,11 +61,11 @@ const SignupPage = () => {
     const { name, email, password, userType} = data;
 
     try {
-      const res = await axios.post("http://localhost:3000/api/user/register", {
+      const res = await api.post("/api/v1/user/register", {
         name,
         email,
         password,
-        type: userType
+        role: userType
       });
       toast({
         title: res.data.message,
@@ -164,11 +165,11 @@ const SignupPage = () => {
                   }}
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="farmer" id="farmer" />
+                    <RadioGroupItem value="FARMER" id="farmer" />
                     <Label htmlFor="farmer">Farmer</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="buyer" id="buyer" />
+                    <RadioGroupItem value="BUYER" id="buyer" />
                     <Label htmlFor="buyer">Buyer</Label>
                   </div>
                 </RadioGroup>

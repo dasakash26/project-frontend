@@ -12,6 +12,8 @@ import { Separator } from "@/components/ui/separator";
 import { OfferPreview } from "@/components/OfferPreview";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
+// import axios from "axios";
+import api from "@/api/axiosConfig";
 
 export default function CreateOffer() {
   //states
@@ -72,7 +74,8 @@ export default function CreateOffer() {
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
+      await api.post("/api/v1/offer/create", offerDetails);
       toast({
         title: "Offer Submitted Successfully",
         description: (
@@ -91,8 +94,12 @@ export default function CreateOffer() {
       });
       console.log("Submitting offer:", offerDetails);
       handleNext();
-    } catch (error) {
-      console.error("Failed to submit offer:", error);
+    } catch (error: any) {
+      // console.error("Failed to submit offer:", error);
+      toast({
+        title: error.response?.data?.message || "Something went wrong!"
+      })
+      console.log(offerDetails);
     } finally {
       setIsSubmitting(false);
     }
