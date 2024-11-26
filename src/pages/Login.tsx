@@ -23,7 +23,7 @@ const loginSchema = z.object({
       .email("Invalid email address"),
     password: z
       .string()
-      .min(1, "Password must be at least 1 characters long"),
+      .min(3, "Password must be at least 3 characters long"),
   });
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
@@ -37,15 +37,14 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-
   const navigate = useNavigate()
   const { toast } = useToast();
 
-
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+  //login controller 
+  const handleLogin: SubmitHandler<LoginFormInputs> = async (data) => {
     const { email, password } = data;
     try{
-      const res = await api.post("/api/v1/user/login", {email, password});
+      const res = await api.post("user/login", {email, password});
       toast({
         title: res.data.message
       })
@@ -57,6 +56,7 @@ const LoginPage = () => {
       })
     }
   }
+
   return (
     <>
     <div className = "flex h-screen w-full items-center justify-center px-4">
@@ -68,7 +68,7 @@ const LoginPage = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)}className="grid gap-4">
+        <form onSubmit={handleSubmit(handleLogin)}className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input

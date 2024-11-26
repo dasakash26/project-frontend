@@ -15,33 +15,28 @@ import { Toaster } from "@/components/ui/toaster";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import axios from "axios";
 import api from "@/api/axiosConfig";
 
 // Zod Schema for Signup Form
-const signupSchema = z.object({
-  name: z.string()
-  .min(1, {message: "Name cannot be empty"}),
-  email: z
-    .string()
-    .email("Invalid email address"),
-  password: z
-    .string()
-    .min(1, "Password must be at least 1 characters long"),
-  confirmPassword: z
-    .string(),
-  userType: z.enum(['FARMER', 'BUYER'], {
-      required_error: 'Please select a user type',
+const signupSchema = z
+  .object({
+    name: z.string().min(1, { message: "Name cannot be empty" }),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(1, "Password must be at least 1 characters long"),
+    confirmPassword: z.string(),
+    userType: z.enum(["FARMER", "BUYER"], {
+      required_error: "Please select a user type",
+    }),
   })
-}).refine(
-  (values) => {
-    return values.password === values.confirmPassword;
-  },
-  {
-    message: "Passwords must match!",
-    path: ["confirmPassword"],
-  }
-);
+  .refine(
+    (values) => {
+      return values.password === values.confirmPassword;
+    },
+    {
+      message: "Passwords must match!",
+      path: ["confirmPassword"],
+    }
+  );
 
 type SignupFormInputs = z.infer<typeof signupSchema>;
 
@@ -51,21 +46,21 @@ const SignupPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignupFormInputs>({
-    resolver: zodResolver(signupSchema), // Integrate Zod with React Hook Form
+    resolver: zodResolver(signupSchema),
   });
+
 
   const navigate = useNavigate();
   const { toast } = useToast();
-
   const onSubmit: SubmitHandler<SignupFormInputs> = async (data) => {
-    const { name, email, password, userType} = data;
+    const { name, email, password, userType } = data;
 
     try {
-      const res = await api.post("/api/v1/user/register", {
+      const res = await api.post("user/register", {
         name,
         email,
         password,
-        role: userType
+        role: userType,
       });
       toast({
         title: res.data.message,
@@ -73,7 +68,7 @@ const SignupPage = () => {
       navigate("/login");
     } catch (error: any) {
       toast({
-        title: error.response?.data?.message || "Something went wrong!"
+        title: error.response?.data?.message || "Something went wrong!",
       });
     }
   };
@@ -155,12 +150,12 @@ const SignupPage = () => {
               </div> */}
               <div className="grid gap-2">
                 <Label>I am a:</Label>
-                <RadioGroup 
-                  className="flex gap-4" 
+                <RadioGroup
+                  className="flex gap-4"
                   defaultValue=""
                   onValueChange={(value) => {
-                    register('userType').onChange({
-                      target: { name: 'userType', value }
+                    register("userType").onChange({
+                      target: { name: "userType", value },
                     });
                   }}
                 >

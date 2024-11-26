@@ -1,15 +1,20 @@
 export const cropTypes = [
-  "VEGETABLE",
-  "PULSE",
   "CEREAL",
-  "ROOT",
-  "TUBER",
-  "HERB",
+  "VEGETABLE",
   "FRUIT",
-  "NUT",
+  "PULSE",
+  "LEGUME",
+  "OILSEED",
+  "FODDER",
+  "SUGAR_CROP",
   "SPICE",
   "COTTON",
   "TOBACCO",
-  "BEVERAGE",
-  "FLOWERS"
+  "FLOWER",
+  "MEDICINAL",
+  "FIBER_CROP",
+  "ORNAMENTAL",
+  "AQUATIC_CROP",
+  "PLANTATION",
+  "MISCELLANEOUS"
 ];

@@ -27,6 +27,7 @@ export const CropDetailsStep: React.FC<CropDetailsStepProps> = ({
   handleSelectChange,
 }) => {
   const { cropName, cropType, description } = offerDetails;
+
   return (
     <>
       <CardHeader className="border-b">
