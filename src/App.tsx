@@ -14,7 +14,7 @@ import Negotiation from "./pages/Negotiation.tsx";
 import Settings from "./pages/Settings.tsx";
 import Notification from "./components/Notification.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import LandingPage from "./pages/LandingPage.tsx";
+import LandingPage from "./pages/LandingPagev2.tsx";
 import SignupPage from "./pages/Signup.tsx";
 
 const App = () => {
