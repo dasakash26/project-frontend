@@ -12,7 +12,6 @@ import { Separator } from "@/components/ui/separator";
 import { OfferPreview } from "@/components/OfferPreview";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
-// import axios from "axios";
 import api from "@/api/axiosConfig";
 
 export default function CreateOffer() {
@@ -61,12 +60,6 @@ export default function CreateOffer() {
   const handleSelectChange = (name: string, value: string) => {
     setOfferDetails((prev) => ({ ...prev, [name]: value }));
   };
-
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     //setOfferDetails((prev) => ({ ...prev, image: e.target.files[0] }));
-  //   }
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
