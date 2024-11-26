@@ -11,7 +11,7 @@ import { Card, CardFooter } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { OfferPreview } from "@/components/OfferPreview";
 import { Toaster } from "@/components/ui/toaster";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CreateOffer() {
   //states
@@ -28,6 +28,7 @@ export default function CreateOffer() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const { toast } = useToast();
 
   const getSubHeading = () => {
     switch (currentStep) {
@@ -198,6 +199,7 @@ export default function CreateOffer() {
           )}
         </Card>
       </div>
+    <Toaster />
     </>
   );
 }
