@@ -14,9 +14,20 @@ export interface OfferDetails {
   price: number;                   // Price per unit (e.g., per kg)
   quantity: number;                // Quantity available
   cropType: CropType;              // Specific crop type from defined enum
-  harvestTime: Date | null;        // Expected harvest date
+  harvestTime: Date | null | string;        // Expected harvest date
   location: string;                // Crop's location
   offerDuration: string;           // Duration of the offer
   paymentTerms: string;            // Terms for payment
   seasonality?: string;            // Seasonality info (optional)
+}
+
+
+export interface NegotiationDetail extends OfferDetails {
+  negotiationID: number;
+  buyerName: string;
+  buyerImageUrl: string;
+  proposedPrice?: string;
+  finalPrice?: string;
+  status: 'Awaiting Response' | 'Counter Offer' | 'Accepted' | 'Rejected';
+  ongoing: boolean,
 }
