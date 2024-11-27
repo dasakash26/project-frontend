@@ -68,7 +68,7 @@ export default function CreateOffer() {
     try {
       // Simulate API call
       // await new Promise((resolve) => setTimeout(resolve, 2000));
-      await api.post("/api/v1/offer/create", offerDetails);
+      await api.post("/offer/create", offerDetails);
       toast({
         title: "Offer Submitted Successfully",
         description: (

@@ -14,7 +14,7 @@ import Negotiation from "./pages/Negotiation.tsx";
 import Settings from "./pages/Settings.tsx";
 import Notification from "./components/Notification.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import LandingPage from "./pages/LandingPagev2.tsx";
+import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/Signup.tsx";
 
 const App = () => {
@@ -23,6 +23,9 @@ const App = () => {
           <>
           {/* Routes are error prone, pay attention */}
           <Route path= "/" element={<LandingPage />} />
+          <Route path="login" element = {<LoginPage />} />
+          <Route path="signup" element = {<SignupPage />} />
+          <Route path="*" element={<NotFound />}/>
           <Route path= "" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="search" element={<Search />} />
@@ -31,9 +34,6 @@ const App = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="notifications" element={<Notification />} />
           </Route>
-          <Route path="login" element = {<LoginPage />} />
-          <Route path="signup" element = {<SignupPage />} />
-          <Route path="*" element={<NotFound />}/>
           </>
         )
       );

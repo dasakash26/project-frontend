@@ -18,7 +18,7 @@ function ProfileDropdown() {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try{
-      await api.get("/api/v1/user/logout")
+      await api.get("/user/logout")
       toast({
         title: "Logged out successfully!"
       })
