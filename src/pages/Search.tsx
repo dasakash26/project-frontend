@@ -72,7 +72,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] pt-16">
+    <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] m-auto mt-16">
       <main className="container mx-auto p-6">
         <div className="flex flex-col gap-6 mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Find Crops</h1>

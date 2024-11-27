@@ -50,16 +50,16 @@ export default function FarmerDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] mt-16">
+    <div className="min-h-screen mx-auto mt-16">
       <main className="p-4 md:p-6 space-y-6">
         {/* Farmer Profile Card */}
-        <Card className="w-full bg-white/90 shadow-lg hover:shadow-xl transition-all duration-200 border-none">
+        <Card className="w-full shadow-lg hover:shadow-xl transition-all duration-200 border-none">
           <CardContent className="p-8">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
               <div className="flex-shrink-0">
                 <Avatar className="h-24 w-24 md:h-32 md:w-32 ring-4 ring-emerald-600/20 ring-offset-4">
                   <AvatarImage src={farmerData.avatar} alt={farmerData.name} />
-                  <AvatarFallback className="bg-[#2e7d32] text-white">{farmerData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  <AvatarFallback className="bg-[#2e7d32]">{farmerData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
               </div>
               <div className="flex-grow space-y-4">
@@ -77,7 +77,7 @@ export default function FarmerDashboard() {
                   ))}
                 </div>
                 <div className="flex gap-4 mt-4">
-                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                  <Button className= "hover:bg-accent text-white">
                     Edit Profile
                   </Button>
                   <Button variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
@@ -102,7 +102,7 @@ export default function FarmerDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Negotiations Section */}
           <div className="lg:col-span-4 space-y-6">
-            <Card className="bg-white/90 shadow-lg hover:shadow-xl transition-all duration-200 border-none sticky top-20">
+            <Card className="shadow-lg hover:shadow-xl transition-all duration-200 border-none sticky top-20">
               <CardHeader className="p-6">
                 <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
                   Ongoing Negotiations
@@ -138,8 +138,8 @@ export default function FarmerDashboard() {
 
           {/* Current Harvest Section */}
           <div className="lg:col-span-8">
-            <Card className="bg-white/90 shadow-lg hover:shadow-xl transition-all duration-200 border-none">
-              <CardHeader className="p-6 flex flex-row items-center justify-between sticky top-0 bg-white/90 z-10">
+            <Card className="shadow-lg hover:shadow-xl transition-all duration-200 border-none">
+              <CardHeader className="p-6 flex flex-row items-center justify-between sticky top-0 z-10">
                 <CardTitle className="text-xl font-bold text-gray-800">Current Harvest Status</CardTitle>
                 <Button variant="outline" size="sm" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
                   Download Report
