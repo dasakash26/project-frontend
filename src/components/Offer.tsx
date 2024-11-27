@@ -8,8 +8,15 @@ import {
   Info,
 } from "lucide-react";
 import { DetailItem, DetailSection } from "./DetailCard";
+import { OfferDetails } from "./utils/types";
 
-export function Offer({ offerDetails }: { offerDetails: any }) {
+interface OfferPreviewProps {
+  offerDetails: OfferDetails;
+  resetForm?: () => void;
+}
+
+
+export const Offer : React.FC<OfferPreviewProps> = ({offerDetails})=>{
   const {
     cropName = "Not specified",
     cropType = "Not specified",
@@ -20,6 +27,7 @@ export function Offer({ offerDetails }: { offerDetails: any }) {
     paymentTerms = "Not specified",
     description = cropName,
   } = offerDetails || {};
+  const date=harvestTime?new Date(harvestTime) : null;
 
   return (
     <>
@@ -56,7 +64,7 @@ export function Offer({ offerDetails }: { offerDetails: any }) {
         >
           <DetailItem
             label="Harvest Date"
-            value={harvestTime?.toLocaleDateString()}
+            value={date?.toLocaleDateString()}
             icon={<CalendarIcon className="w-4 h-4" />}
           />
           <DetailItem

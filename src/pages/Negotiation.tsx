@@ -1,65 +1,56 @@
-"use client"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { NegotiationCard } from "@/components/Negotiation-card";
+import { NegotiationPreview } from "@/components/NegotiationPreview";
+import { NegotiationDetail } from "@/components/utils/types";
+import { negotiationData } from "@/components/utils/data/NegotiationData";
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Wheat, CropIcon as Corn, Carrot, Clock, CheckCircle, AlertCircle } from 'lucide-react'
-
-const cropIcons = {
-  Wheat: Wheat,
-  Corn: Corn,
-  Carrot: Carrot,
-}
-
-type Negotiation = {
-  id: string
-  farmerName: string
-  crop: keyof typeof cropIcons
-  quantity: string
-  price: string
-  status: 'pending' | 'accepted' | 'rejected'
-  lastUpdated: string
-}
-
-const negotiations: Negotiation[] = [
-  { id: '1', farmerName: 'John Doe', crop: 'Wheat', quantity: '1000 kg', price: '$0.50/kg', status: 'pending', lastUpdated: '2h ago' },
-  { id: '2', farmerName: 'Jane Smith', crop: 'Corn', quantity: '2000 kg', price: '$0.45/kg', status: 'pending', lastUpdated: '5h ago' },
-  { id: '3', farmerName: 'Bob Johnson', crop: 'Carrot', quantity: '500 kg', price: '$0.75/kg', status: 'accepted', lastUpdated: '1d ago' },
-  { id: '4', farmerName: 'Alice Brown', crop: 'Wheat', quantity: '1500 kg', price: '$0.48/kg', status: 'rejected', lastUpdated: '2d ago' },
-]
-
-export default function NegotiationsOverview() {
-  const [activeTab, setActiveTab] = useState('ongoing')
-
-  const filteredNegotiations = negotiations.filter(neg => 
-    activeTab === 'ongoing' ? neg.status === 'pending' : neg.status !== 'pending'
-  )
+const Negotiation = () => {
+  const [showONgoing, setShowOngoing] = useState(true);
+  const [ViewDetail,setViewDetail] = useState(false);
+  const [getData,setgetData] = useState<NegotiationDetail> ();
+	const remove = ():void =>{
+		setViewDetail(false);
+	}
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-green-50 to-white p-4 md:p-10 pt-30'>
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white p-4 md:p-8">
-      <h1 className="text-3xl font-bold text-green-800 mb-8 text-center">Negotiations Overview</h1>
-      
-      <Tabs defaultValue="ongoing" className="max-w-4xl mx-auto" onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="ongoing">Ongoing Negotiations</TabsTrigger>
-          <TabsTrigger value="completed">Completed Negotiations</TabsTrigger>
-        </TabsList>
-        <TabsContent value="ongoing">
-          <h2 className="text-2xl font-semibold text-green-700 mb-4">Ongoing Negotiations</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {filteredNegotiations.map(renderNegotiationCard)}
-          </div>
-        </TabsContent>
-        <TabsContent value="completed">
-          <h2 className="text-2xl font-semibold text-green-700 mb-4">Completed Negotiations</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {filteredNegotiations.map(renderNegotiationCard)}
-          </div>
-        </TabsContent>
-      </Tabs>
+    <div className=" w-full  mt-6 bg-gradient-to-br from-white to-[#c8ffcc] pt-16">
+      <h1 className="text-3xl text-green-800 text-center font-bold  mb-2">
+        Negotiations
+      </h1>
+
+      <h3 className="text-1xl text-green-800 text-center  mb-2">You will see all your negotiations here</h3>
+      <div className="flex space-x-9 mb-6 mx-5">
+      <Button 
+      // className="bg-green-900 font-bold"
+      onClick={()=>setShowOngoing(true)}
+      variant={showONgoing? 'default':'outline'}
+      >Ongoing Negotiations</Button>
+      <Button 
+      // className="bg-green-900 font-bold"
+      onClick={()=>setShowOngoing(false)}
+      variant={showONgoing? 'outline':'default'}
+      >Completed Negotiations</Button>
+      </div>
+      {
+        //@ts-ignore
+        ViewDetail?<NegotiationPreview negotiation={getData} closeDetail={remove}/>:
+        <div className="grid gap-6 md:grid-cols-2     lg:grid-cols-3 px-5">
+          {
+            showONgoing? negotiationData.map(
+              (item)=>(
+                //@ts-ignore
+                item.ongoing && <NegotiationCard key ={item.negotiationID} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
+              )) :
+              negotiationData.map(
+                (item)=>(
+                  //@ts-ignore
+                  !item.ongoing && <NegotiationCard key ={item.negotiationID}negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
+              )
+            )
+          }
+        </div>
+      }
     </div>
     </div>
   )
