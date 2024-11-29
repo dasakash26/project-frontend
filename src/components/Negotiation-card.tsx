@@ -9,6 +9,7 @@ import { NegotiationDetail } from "./utils/types";
 import { DetailItem } from "./DetailCard";
 import { Button } from "./ui/button";
 import React from "react";
+import { Link } from "react-router-dom";
 // import { NegotiationPreview } from "./NegotiationPreview";
 // import { useState } from "react";
 // import { boolean } from "zod";
@@ -58,7 +59,7 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<Button onClick={
 					handleClick
 				}>View Details</Button>
-				<Button>Negotiate</Button>
+				<Link to={`/negotiations/${negotiation.negotiationID}`}><Button>Negotiate</Button></Link>
 			</div>
 		</CardFooter>
 	</Card>

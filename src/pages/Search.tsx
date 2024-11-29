@@ -15,18 +15,21 @@ import api, { offerSearchRoute } from "@/api/axiosConfig";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import OfferCard from "@/components/OfferCard";
-import { cropTypes } from "@/components/utils/consts";
-
+// import { NegotiationPreview } from "@/components/NegotiationPreview";
+// import { ReviewStep } from '@/components/ReviewStep';
+import { OfferDetails, CropType } from '@/components/utils/types';
+import { OfferPreview } from '@/components/OfferPreview';
+import { cropTypes } from '@/components/utils/consts';
 interface Offer {
   id: string;
   cropName: string;
   description?: string;
-  cropType: string;
+  cropType: CropType;
   price: number;
   quantity: number;
   harvestTime?: string;
   location: string;
-  offerDuration: number;
+  offerDuration: string;
   paymentTerms: string;
   createdBy: string;
 }
@@ -38,6 +41,8 @@ export default function SearchPage() {
   const [cropType, setCropType] = useState("");
   const [qualityGrade, setQualityGrade] = useState("");
   const [sortBy, setSortBy] = useState("newest");
+  const [viewDetails, setViewDetails] = useState(false);
+  const [offerDetails, setOfferDetails] = useState<OfferDetails | null>(null);
 
   const { toast } = useToast();
 
@@ -70,8 +75,20 @@ export default function SearchPage() {
     setPriceRange([0, 100]);
     setSortBy("newest");
   };
+  const handleNegotiate = async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    toast({
+      title: "Negotiation Started",
+      description: "Negotiation with the seller has been started",
+    });
+  }
 
   return (
+    viewDetails ? <div className='mt-16 mx-auto'>
+      <OfferPreview offerDetails={offerDetails!} resetForm={() => setViewDetails(false)} />
+      <Button className="w-full" variant="outline" onClick= {handleNegotiate}>Negotiate</Button>
+      <Toaster />
+      </div> :
     <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] m-auto mt-16">
       <main className="container mx-auto p-6">
         <div className="flex flex-col gap-6 mb-8">
@@ -169,7 +186,7 @@ export default function SearchPage() {
 
             <div className="grid md:grid-cols-2 gap-4 auto-rows-max">
               {offers.map((offer) => (
-                <OfferCard key={offer.id} offer={offer} />
+                <OfferCard key={offer.id} offer={offer} setViewDetails={setViewDetails} setOfferDetails={setOfferDetails}  />
               ))}
             </div>
           </div>

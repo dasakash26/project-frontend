@@ -1,21 +1,26 @@
-import React from 'react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { IndianRupee, Wheat, MapPin, Calendar } from 'lucide-react';
+// import { Toaster } from '@/components/ui/toaster';
+// import { useToast } from "@/hooks/use-toast";
+import { OfferDetails } from "./utils/types";
 
 interface OfferCardProps {
-  offer?: {
-    cropName: string;
-    cropType: string;
-    price: number;
-    quantity: number;
-    harvestTime?: string | Date;
-    location: string;
-  };
+  // offer?: {
+  //   cropName: string;
+  //   cropType: string;
+  //   price: number;
+  //   quantity: number;
+  //   harvestTime?: string | Date;
+  //   location: string;
+  // },
+  offer?: OfferDetails,
+  setViewDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setOfferDetails: React.Dispatch<React.SetStateAction<OfferDetails | null>>;
 }
 
-const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
+const OfferCard: React.FC<OfferCardProps> = ({ offer, setViewDetails, setOfferDetails}) => {
   if (!offer) {
     return (
       <Card className="w-full max-w-sm">
@@ -25,7 +30,11 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
       </Card>
     );
   }
-
+  const handleViewDetails = () => {
+    setViewDetails(true);
+    setOfferDetails(offer);
+  }
+  
   const formatDate = (date: string | Date) => {
     if (date instanceof Date) {
       return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -34,6 +43,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
   };
 
   return (
+    <>
     <Card className="w-full max-w-sm overflow-hidden transition-shadow duration-300 hover:shadow-lg">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
@@ -78,10 +88,13 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
           )}
         </div>
       </CardContent>
-      <CardFooter className="bg-muted p-4">
-        <Button className="w-full" variant="outline">View Details</Button>
+      <CardFooter className="flex gap-4 bg-muted p-4">
+        <Button className="w-full" variant="outline" onClick={handleViewDetails}>View Details</Button>
+        
       </CardFooter>
     </Card>
+    {/* <Toaster /> */}
+    </>
   );
 };
 

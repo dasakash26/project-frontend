@@ -5,7 +5,7 @@ import { NegotiationPreview } from "@/components/NegotiationPreview";
 import { NegotiationDetail } from "@/components/utils/types";
 import { negotiationData } from "@/components/utils/data/NegotiationData";
 
-const Negotiation = () => {
+const Negotiations = () => {
   const [showONgoing, setShowOngoing] = useState(true);
   const [ViewDetail,setViewDetail] = useState(false);
   const [getData,setgetData] = useState<NegotiationDetail> ();
@@ -55,4 +55,4 @@ const Negotiation = () => {
   )
 }
 
-export default Negotiation;
+export default Negotiations;
