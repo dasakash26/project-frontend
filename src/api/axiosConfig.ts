@@ -1,7 +1,16 @@
 import axios from "axios";
 
+const getBaseURL = () => {
+  if (import.meta.env.PROD) {
+    // Production URL
+    return 'https://project-backend-ji25.onrender.com';
+  } else {
+    // Development URL
+    return 'http://localhost:3000/api/v1/';
+  }
+};
 const api = axios.create({
-  baseURL: "http://localhost:3000/api/v1/",
+  baseURL: getBaseURL(),
   withCredentials: true,
 });
 
