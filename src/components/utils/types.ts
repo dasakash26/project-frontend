@@ -23,11 +23,12 @@ export interface OfferDetails {
 
 
 export interface NegotiationDetail extends OfferDetails {
-  negotiationID: number;
+  id: string;
   buyerName: string;
-  buyerImageUrl: string;
+  buyerImageUrl?: string;
   proposedPrice?: string;
   finalPrice?: string;
-  status: 'Awaiting Response' | 'Counter Offer' | 'Accepted' | 'Rejected';
+  // status: 'AWAITING_RESPONSE' | 'COUNTER_OFFER' | 'ACCEPTED' | 'REJECTED';
+  status?: string;
   ongoing: boolean,
 }

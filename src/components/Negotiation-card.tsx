@@ -33,7 +33,7 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<div className="flex justify-between">
 					<div className="flex flex-col">
 						{negotiation.cropName}
-						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.negotiationID}</p>
+						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id}</p>
 						</CardDescription>
 					</div>
 					<div className=" text-black flex items-center gap-5">
@@ -59,7 +59,7 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<Button onClick={
 					handleClick
 				}>View Details</Button>
-				<Link to={`/negotiations/${negotiation.negotiationID}`}><Button>Negotiate</Button></Link>
+				<Link to={`/negotiations/${negotiation.id}`}><Button>Negotiate</Button></Link>
 			</div>
 		</CardFooter>
 	</Card>

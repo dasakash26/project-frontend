@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import api, { offerSearchRoute } from "@/api/axiosConfig";
+import api, { offerSearchRoute, negotiationRoute } from "@/api/axiosConfig";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import OfferCard from "@/components/OfferCard";
@@ -125,11 +125,20 @@ export default function SearchPage() {
   };
 
   const handleNegotiate = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    try{
+      await api.post(`${negotiationRoute}/create`, offerDetails);
     toast({
       title: "Negotiation Started",
       description: "Negotiation with the seller has been started",
-    });
+      });
+    } catch (error) {
+      console.log("Error negotiating:", error);
+      toast({
+        title: "Error negotiating",
+        variant: "destructive",
+      });
+    }
   };
 
   return viewDetails ? (

@@ -25,7 +25,7 @@ export const NegotiationPreview: React.FC<NegotiationPreview> = ({negotiation,cl
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5" />
             <span>
-              Negotiation ID : {negotiation.negotiationID}
+              Negotiation ID : {negotiation.id}
             </span>
           </div>
         </div>

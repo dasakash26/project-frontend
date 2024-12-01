@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NegotiationCard } from "@/components/Negotiation-card";
 import { NegotiationPreview } from "@/components/NegotiationPreview";
 import { NegotiationDetail } from "@/components/utils/types";
-import { negotiationData } from "@/components/utils/data/NegotiationData";
+// import { negotiationData } from "@/components/utils/data/NegotiationData";
+import api from "@/api/axiosConfig";
+import { negotiationRoute } from "@/api/axiosConfig";
 
 const Negotiations = () => {
   const [showONgoing, setShowOngoing] = useState(true);
@@ -12,7 +14,27 @@ const Negotiations = () => {
 	const remove = ():void =>{
 		setViewDetail(false);
 	}
-
+  const [negotiationData, setNegotiationData] = useState<any[]>([]);
+  // const [currentTerms, setCurrentTerms] = useState<any[]>([]);
+  useEffect(()=>{
+    const getNegotiations = async () => {
+      const response = await api.get(`${negotiationRoute}`);
+      // setNegotiationData(response.data.negotiations);
+      // setCurrentTerms(response.data.currentTerms);
+      let res: any[] = [];
+      response.data.negotiations.forEach((item: any) => {
+        response.data.currentTerms.forEach((term: any) => {
+          if(item.currentTermsId === term.id){
+            res.push({...term, id: item.id, buyerName: "Buyer Name", ongoing: item.ongoing, proposedPrice: term.price});
+          }
+        })
+      })
+      setNegotiationData(res);
+      console.log(negotiationData);
+      // setCurrentTerms(res);
+    }
+    getNegotiations();
+  },[])
   return (
     <div className=" w-full  mt-6 bg-gradient-to-br from-white to-[#c8ffcc] pt-16">
       <h1 className="text-3xl text-green-800 text-center font-bold  mb-2">
@@ -40,12 +62,12 @@ const Negotiations = () => {
             showONgoing? negotiationData.map(
               (item)=>(
                 //@ts-ignore
-                item.ongoing && <NegotiationCard key ={item.negotiationID} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
+                item.ongoing && <NegotiationCard key ={item.id} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
               )) :
               negotiationData.map(
                 (item)=>(
                   //@ts-ignore
-                  !item.ongoing && <NegotiationCard key ={item.negotiationID}negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
+                  !item.ongoing && <NegotiationCard key ={item.id} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
               )
             )
           }
