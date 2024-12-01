@@ -18,8 +18,10 @@ interface negotiationCard{
 	negotiation: NegotiationDetail;
 	setViewDetail:React.Dispatch<React.SetStateAction<boolean>>;
 	setgetData:React.Dispatch<React.SetStateAction<NegotiationDetail>>;
+	myTurn: boolean;
+	currentTermsId: string;
 }
-export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDetail,setgetData})=>{
+export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDetail,setgetData, myTurn, currentTermsId})=>{
 	const handleClick= ():void =>{
 		setViewDetail(true);
 		setgetData(negotiation);
@@ -33,7 +35,7 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<div className="flex justify-between">
 					<div className="flex flex-col">
 						{negotiation.cropName}
-						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id}</p>
+						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id.substring(0, 3)}</p>
 						</CardDescription>
 					</div>
 					<div className=" text-black flex items-center gap-5">
@@ -59,7 +61,10 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<Button onClick={
 					handleClick
 				}>View Details</Button>
-				<Link to={`/negotiations/${negotiation.id}`}><Button>Negotiate</Button></Link>
+				{myTurn?
+				<Link to={`/negotiations/${currentTermsId}`}><Button>Negotiate</Button></Link>
+				:
+				<Button disabled>Waiting for response</Button>}
 			</div>
 		</CardFooter>
 	</Card>

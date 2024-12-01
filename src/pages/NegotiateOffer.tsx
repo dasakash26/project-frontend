@@ -1,42 +1,70 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 // import { Separator } from "@/components/ui/separator"
 // import { ScrollArea } from "@/components/ui/scroll-area"
-import { negotiationData } from '@/components/utils/data/NegotiationData';
+// import { negotiationData } from '@/components/utils/data/NegotiationData';
 import { useParams } from 'react-router-dom';
 import { Wheat, FileText, MessageSquare, DollarSign, Calendar, Send, Check, X, MapPin, CreditCard } from 'lucide-react'
+import api, { negotiationRoute } from '@/api/axiosConfig';
+import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const ContractNegotiationPage = () => {
   const [counterOffer, setCounterOffer] = useState({
     quantity: '',
     price: '',
-    deliveryDate: '',
+    harvestTime: '',
     location: '',
     paymentTerms: ''
   })
 const {negotiationID} = useParams();
+const [initialOffer, setInitialOffer] = useState<any>({});
+const {toast} = useToast();
+const [date, setDate] = useState<string>('');
 
   // const [messages, setMessages] = useState([
   //   { sender: 'Farmer', content: 'I can offer 1000 kg of wheat at $0.50 per kg.' },
   //   { sender: 'You', content: 'Can we negotiate on the price? How about $0.48 per kg?' },
   //   { sender: 'Farmer', content: 'I can do $0.49 per kg, but that\'s my final offer.' },
   // ])
-
-  const initialOffer = negotiationData.find(item => item.negotiationID === parseInt(negotiationID!));
-  console.log(initialOffer);
-
+  const getCurrentTerms = async () => {
+    const response = await api.get(`${negotiationRoute}/${negotiationID}`);
+    setInitialOffer(response.data.currentTerms);
+    console.log(response.data.currentTerms);
+    const d = new Date(response.data.currentTerms.harvestTime);
+    setDate(d.toLocaleDateString());
+  }
+  useEffect(()=>{
+    getCurrentTerms();
+  },[])
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCounterOffer({ ...counterOffer, [e.target.name]: e.target.value })
   }
 
-  const handleCounterOffer = () => {
+  const handleCounterOffer = async () => {
     console.log('Sending counter offer:', counterOffer)
     // setMessages([...messages, { sender: 'You', content: `I propose: ${counterOffer.quantity} kg at $${counterOffer.price}/kg, delivered by ${counterOffer.deliveryDate} at ${counterOffer.location} with payment terms of ${counterOffer.paymentTerms}` }])
+    try{
+      const response = await api.post(`${negotiationRoute}/update/${negotiationID}`, counterOffer);
+      console.log(response);
+      toast({
+        title: "Counter Offer Sent",
+        description: "Your counter offer has been sent successfully",
+      })
+      
+    }catch(error){
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+      })
+    }
   }
 
   return (
@@ -67,7 +95,7 @@ const {negotiationID} = useParams();
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Harvest Time:</span>
-                <span className="font-medium">{initialOffer?.harvestTime!.toLocaleString()}</span>
+                <span className="font-medium">{date}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Location:</span>
@@ -129,14 +157,14 @@ const {negotiationID} = useParams();
               </div>
               <div className="relative">
                 <Input
-                  id="deliveryDate"
-                  name="deliveryDate"
+                  id="harvestTime"
+                  name="harvestTime"
                   type="date"
-                  value={counterOffer.deliveryDate}
+                  value={counterOffer.harvestTime}
                   onChange={handleInputChange}
                   className="peer pl-8 border-b border-green-300 focus:border-green-500 transition-all"
                 />
-                <Label htmlFor="deliveryDate" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
+                <Label htmlFor="harvestTime" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
                   Delivery Date
                 </Label>
                 <Calendar className="absolute left-2 top-3 h-5 w-5 text-green-500" />
@@ -205,6 +233,7 @@ const {negotiationID} = useParams();
           </CardContent>
         </Card> */}
       </div>
+      <Toaster />
     </div>
   )
 }
