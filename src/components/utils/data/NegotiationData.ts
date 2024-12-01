@@ -1,6 +1,6 @@
-import { NegotiationDetail } from "../types";
+// import { NegotiationDetail } from "../types";
 
-export const negotiationData:NegotiationDetail[]=
+export const negotiationData:any[]=
 [
     {
       "cropName": "Crop 1",

@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Handshake, FileSignature, BarChart, Shield, Sprout, Truck } from 'lucide-react'

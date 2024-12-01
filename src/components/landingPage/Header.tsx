@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Menu } from 'lucide-react'
@@ -37,7 +37,7 @@ export function Header() {
               Get Started
             </Button></Link>
           </div>
-          <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button title="Menu" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             <Menu className="h-6 w-6" />
           </button>
         </div>
