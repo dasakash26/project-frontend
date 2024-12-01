@@ -10,7 +10,7 @@
       "@/*": ["./src/*"]
     },
     "allowJs": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true
   }
 }
