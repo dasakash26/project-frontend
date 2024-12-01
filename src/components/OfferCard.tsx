@@ -30,6 +30,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, setViewDetails, setOfferDe
       </Card>
     );
   }
+  
   const handleViewDetails = () => {
     setViewDetails(true);
     setOfferDetails(offer);
