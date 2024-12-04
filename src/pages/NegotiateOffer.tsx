@@ -1,14 +1,9 @@
-"use client"
-
 import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Separator } from "@/components/ui/separator"
-// import { ScrollArea } from "@/components/ui/scroll-area"
-// import { negotiationData } from '@/components/utils/data/NegotiationData';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Wheat, FileText, MessageSquare, DollarSign, Calendar, Send, Check, X, MapPin, CreditCard } from 'lucide-react'
 import api, { negotiationRoute } from '@/api/axiosConfig';
 import { useToast } from "@/hooks/use-toast";
@@ -22,18 +17,18 @@ const ContractNegotiationPage = () => {
     location: '',
     paymentTerms: ''
   })
-const {negotiationID} = useParams();
+const {currentTermsId} = useParams();
 const [initialOffer, setInitialOffer] = useState<any>({});
 const {toast} = useToast();
 const [date, setDate] = useState<string>('');
-
+const navigate = useNavigate();
   // const [messages, setMessages] = useState([
   //   { sender: 'Farmer', content: 'I can offer 1000 kg of wheat at $0.50 per kg.' },
   //   { sender: 'You', content: 'Can we negotiate on the price? How about $0.48 per kg?' },
   //   { sender: 'Farmer', content: 'I can do $0.49 per kg, but that\'s my final offer.' },
   // ])
   const getCurrentTerms = async () => {
-    const response = await api.get(`${negotiationRoute}/${negotiationID}`);
+    const response = await api.get(`${negotiationRoute}/${currentTermsId}`);
     setInitialOffer(response.data.currentTerms);
     console.log(response.data.currentTerms);
     const d = new Date(response.data.currentTerms.harvestTime);
@@ -51,7 +46,7 @@ const [date, setDate] = useState<string>('');
     console.log('Sending counter offer:', counterOffer)
     // setMessages([...messages, { sender: 'You', content: `I propose: ${counterOffer.quantity} kg at $${counterOffer.price}/kg, delivered by ${counterOffer.deliveryDate} at ${counterOffer.location} with payment terms of ${counterOffer.paymentTerms}` }])
     try{
-      const response = await api.post(`${negotiationRoute}/update/${negotiationID}`, counterOffer);
+      const response = await api.post(`${negotiationRoute}/update/${currentTermsId}`, counterOffer);
       console.log(response);
       toast({
         title: "Counter Offer Sent",
@@ -65,6 +60,24 @@ const [date, setDate] = useState<string>('');
         description: "Something went wrong",
       })
     }
+  }
+  const handleAcceptOffer = async () => {
+    const res = await api.post(`${negotiationRoute}/complete/${currentTermsId}`,{status: "ACCEPTED"});
+    toast({
+      title: "Offer Accepted",
+      description: "The offer has been accepted successfully",
+    })
+    navigate("/negotiations");
+    console.log(res);
+  }
+  const handleRejectOffer = async () => {
+    const res = await api.post(`${negotiationRoute}/complete/${currentTermsId}`,{status: "REJECTED"});
+    toast({
+      title: "Offer Rejected",
+      description: "The offer has been rejected successfully",
+    })
+    navigate("/negotiations");
+    console.log(res);
   }
 
   return (
@@ -107,12 +120,12 @@ const [date, setDate] = useState<string>('');
               </div>
             </div>
           </CardContent>
-          <CardFooter className="justify-between bg-green-50">
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
-              <Check className="mr-2 h-4 w-4" /> Accept Offer
+          <CardFooter className="justify-between bg-green-50 gap-10">
+            <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={handleAcceptOffer}>
+              <Check className="h-4 w-4" /> Accept Offer
             </Button>
-            <Button variant="outline" className="border-red-500 text-red-500 hover:bg-red-50">
-              <X className="mr-2 h-4 w-4" /> Reject Offer
+            <Button onClick={handleRejectOffer} variant="outline" className="border-red-500 text-red-500 hover:bg-red-500">
+              <X className="h-4 w-4" /> Reject Offer
             </Button>
           </CardFooter>
         </Card>

@@ -32,8 +32,8 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 		<Card className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
 		<CardHeader className="bg-green-100 text-green-800 font-semibold text-lg m-0 py-1">
 			<CardTitle>
-				<div className="flex justify-between">
-					<div className="flex flex-col">
+				<div className="flex justify-between pt-3">
+					<div className="flex flex-col text-2xl">
 						{negotiation.cropName}
 						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id.substring(0, 3)}</p>
 						</CardDescription>
@@ -61,10 +61,15 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<Button onClick={
 					handleClick
 				}>View Details</Button>
-				{myTurn?
-				<Link to={`/negotiations/${currentTermsId}`}><Button>Negotiate</Button></Link>
-				:
-				<Button disabled>Waiting for response</Button>}
+				{negotiation.ongoing ? (
+            		myTurn ? (
+                		<Link to={`/negotiations/${currentTermsId}`}><Button>Negotiate</Button></Link>
+           		 ) : (
+                		<Button disabled>Waiting for response</Button>
+           		 )
+        		) : (
+            	<Button disabled>Completed</Button>
+        		)}
 			</div>
 		</CardFooter>
 	</Card>

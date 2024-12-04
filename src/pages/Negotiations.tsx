@@ -6,6 +6,7 @@ import { NegotiationDetail } from "@/components/utils/types";
 // import { negotiationData } from "@/components/utils/data/NegotiationData";
 import api, { userRoute } from "@/api/axiosConfig";
 import { negotiationRoute } from "@/api/axiosConfig";
+import { Toaster } from "@/components/ui/toaster";
 
 const Negotiations = () => {
   // const [ myTurn, setMyTurn] = useState(true);
@@ -30,7 +31,7 @@ const Negotiations = () => {
             let myTurn: boolean;
             if(item.turn === me.data.user.id) myTurn = true;
             else myTurn = false;
-            res.push({...term, id: item.id, buyerName: "Name", ongoing: item.ongoing, proposedPrice: term.price, myTurn: myTurn, currentTermsId: item.currentTermsId});
+            res.push({...term, id: item.id, buyerName: "Name", ongoing: item.ongoing, proposedPrice: term.price, myTurn: myTurn, currentTermsId: item.currentTermsId, status: item.status});
           }
         })
       })
@@ -41,6 +42,7 @@ const Negotiations = () => {
     getNegotiations();
   },[])
   return (
+    <>
     <div className=" w-full  mt-6 bg-gradient-to-br from-white to-[#c8ffcc] pt-16">
       <h1 className="text-3xl text-green-800 text-center font-bold  mb-2">
         Negotiations
@@ -79,6 +81,8 @@ const Negotiations = () => {
         </div>
       }
     </div>
+    <Toaster />
+    </>
   )
 }
 
