@@ -11,7 +11,7 @@ import { Card } from "./ui/card";
 // import axios from "axios";
 import api from "@/api/axiosConfig";
 import { toast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 function ProfileDropdown() {
@@ -46,9 +46,11 @@ function ProfileDropdown() {
           side="top"
           className="w-[--radix-popper-anchor-width] bg-[#47663B] shadow-lg rounded-lg p-2"
         >
+          <Link to="/editProfile">
           <DropdownMenuItem className="p-2 on text-white rounded-lg">
             <span>Account</span>
           </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className="p-2 text-white rounded-lg">
             <span>Payments</span>
           </DropdownMenuItem>

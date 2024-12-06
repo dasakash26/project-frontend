@@ -5,7 +5,7 @@ function Logo() {
     <>
       <Link to="/dashboard" className="flex items-center gap-2 ">
         <img src="/img/logoImg.png" alt="Agripact Logo" className="h-12" />
-        <span className="text-emerald-800 text-2xl font-bold">Agripact</span>
+        <span className="text-green-200 text-2xl font-bold">Agripact</span>
       </Link>
     </>
   );

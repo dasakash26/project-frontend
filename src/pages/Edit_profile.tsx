@@ -38,6 +38,7 @@ import { useToast } from '@/hooks/use-toast'
 import { CropInputs } from '../components/crop-inputs'
 import { BankDetails } from '../components/bank-details'
 import { PhotoUpload } from '../components/photo-upload'
+import { Toaster } from '@/components/ui/toaster'
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -639,6 +640,7 @@ export default function EditProfilePage() {
           </div>
         </form>
       </Form>
+      <Toaster />
     </div>
   )
 }
