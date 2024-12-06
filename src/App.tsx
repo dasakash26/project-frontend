@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/Signup.tsx";
 import ContractNegotiationPage from "./pages/NegotiateOffer.tsx";
+import EditProfilePage from "./pages/Edit_profile.tsx";
 
 const App = () => {
     const router = createBrowserRouter(
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="*" element={<NotFound />}/>
           <Route path= "" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="editProfile" element={<EditProfilePage/>} />
             <Route path="search" element={<Search />} />
             <Route path="create-offer" element={<CreateOffer />} />
             <Route path="negotiations" element={<Negotiations />} />
