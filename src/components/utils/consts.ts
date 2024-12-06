@@ -18,3 +18,4 @@ export const cropTypes = [
   "PLANTATION",
   "MISCELLANEOUS"
 ];
+

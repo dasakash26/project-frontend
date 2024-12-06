@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import ProfileDropdown from "./ProfileDropdown";
 // import { useState } from "react";
-import Logo from "./Logo";
+// import Logo from "./Logo";
 
 // Menu items.
 const items = [
@@ -58,7 +58,7 @@ export function AppSidebar() {
       collapsible="icon"
       variant="sidebar"
     >
-      <div className="flex items-center justify-center h-16 bg-[#224422] text-white"><Logo/></div>
+      <div className="flex items-center justify-center h-16 bg-[#224422] text-white"></div>
       <SidebarContent className="relative">
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>

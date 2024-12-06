@@ -1,15 +1,12 @@
-// import React from 'react'
-
 import { Link } from "react-router-dom";
 
 function Logo() {
   return (
     <>
-      <Link to="/dashboard">
-        <img src="./img/logoImg.png" alt="Agripact Logo" className="h-12" />
+      <Link to="/dashboard" className="flex items-center gap-2 ">
+        <img src="/img/logoImg.png" alt="Agripact Logo" className="h-12" />
+        <span className="text-emerald-800 text-2xl font-bold">Agripact</span>
       </Link>
-      {/* <span className="text-white text-2xl font-bold">Agripact</span> */}
-      <Link to="/dashboard" className="text-white text-2xl font-bold">AgriPact</Link>
     </>
   );
 }

@@ -10,11 +10,11 @@ export type CropType =
 
 export interface OfferDetails {
   cropName: string;                // Name of the crop
-  description: string;             // Description of the crop or offer
+  description?: string;             // Description of the crop or offer
   price: number;                   // Price per unit (e.g., per kg)
   quantity: number;                // Quantity available
   cropType: CropType;              // Specific crop type from defined enum
-  harvestTime: Date | null | string;        // Expected harvest date
+  harvestTime?: Date | null | string;        // Expected harvest date
   location: string;                // Crop's location
   offerDuration: string;           // Duration of the offer
   paymentTerms: string;            // Terms for payment
@@ -23,11 +23,12 @@ export interface OfferDetails {
 
 
 export interface NegotiationDetail extends OfferDetails {
-  negotiationID: number;
+  id: string;
   buyerName: string;
-  buyerImageUrl: string;
+  buyerImageUrl?: string;
   proposedPrice?: string;
   finalPrice?: string;
-  status: 'Awaiting Response' | 'Counter Offer' | 'Accepted' | 'Rejected';
+  // status: 'AWAITING_RESPONSE' | 'COUNTER_OFFER' | 'ACCEPTED' | 'REJECTED';
+  status?: string;
   ongoing: boolean,
 }

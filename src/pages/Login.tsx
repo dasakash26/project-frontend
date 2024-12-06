@@ -23,7 +23,7 @@ const loginSchema = z.object({
       .email("Invalid email address"),
     password: z
       .string()
-      .min(3, "Password must be at least 3 characters long"),
+      .min(1, "Password must be at least 1 characters long"),
   });
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
