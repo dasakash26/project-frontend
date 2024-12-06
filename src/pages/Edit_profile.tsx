@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -25,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
+// import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -35,10 +34,10 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { toast } from '@/components/ui/use-toast'
-import { CropInputs } from './components/crop-inputs'
-import { BankDetails } from './components/bank-details'
-import { PhotoUpload } from './components/photo-upload'
+import { useToast } from '@/hooks/use-toast'
+import { CropInputs } from '../components/crop-inputs'
+import { BankDetails } from '../components/bank-details'
+import { PhotoUpload } from '../components/photo-upload'
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -83,9 +82,9 @@ const formSchema = z.object({
 })
 
 export default function EditProfilePage() {
-  const router = useRouter()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
+  const {toast} = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -141,7 +140,7 @@ export default function EditProfilePage() {
       <div className="flex items-center justify-between mb-6">
         <Button
           variant="ghost"
-          onClick={() => router.back()}
+          onClick={() => navigate(-1)}
           className="flex items-center"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -629,7 +628,7 @@ export default function EditProfilePage() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => router.back()}
+              onClick={() =>navigate(-1)}
             >
               Cancel
             </Button>

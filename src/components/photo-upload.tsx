@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import Image from 'next/image'
 import { Camera, Trash2, Upload } from 'lucide-react'
 
 interface Photo {
@@ -27,11 +26,10 @@ export function PhotoUpload() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {photos.map((photo) => (
           <div key={photo.id} className="relative aspect-square">
-            <Image
+            <img
               src={photo.url}
               alt={`Farm photo ${photo.id}`}
-              fill
-              className="object-cover rounded-lg"
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-lg "
             />
             <Button
               variant="destructive"
