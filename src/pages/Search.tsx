@@ -133,9 +133,10 @@ export default function SearchPage() {
       description: "Negotiation with the seller has been started",
       });
     } catch (error) {
-      console.log("Error negotiating:", error);
       toast({
-        title: "Error negotiating",
+        title: "Cannot create negotiation",
+        //@ts-ignore
+        description: error.response.data?.error,
         variant: "destructive",
       });
     }

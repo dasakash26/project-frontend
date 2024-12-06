@@ -51,9 +51,18 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 			<span className="font-bold"><DetailItem label="Crop" value={negotiation.cropName}/></span>
 			<DetailItem label="Quantity" value={negotiation.quantity}/>
 			{
-				negotiation.ongoing? <DetailItem label="Proposed Price" value={negotiation.proposedPrice}/> :<DetailItem label="Final Price" value={negotiation.finalPrice}/>
+				negotiation.ongoing?
+				
+					<DetailItem label="Proposed Price" value={negotiation.proposedPrice}/> 
+				:
+				(
+				<>
+					<DetailItem label="Negotiation Status" value={negotiation.status}/>
+					<DetailItem label="Final Price" value={negotiation.proposedPrice}/>
+				</>
+				)
+				
 			}
-			<DetailItem label="Negotiation Status" value={negotiation.status}/>
 			<DetailItem label="Harvest Date" value={String(negotiation.harvestTime)}/>
 		</CardContent>
 		<CardFooter>
