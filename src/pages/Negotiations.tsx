@@ -4,7 +4,7 @@ import { NegotiationCard } from "@/components/Negotiation-card";
 import { NegotiationPreview } from "@/components/NegotiationPreview";
 import { NegotiationDetail } from "@/components/utils/types";
 // import { negotiationData } from "@/components/utils/data/NegotiationData";
-import api, { userRoute } from "@/api/axiosConfig";
+import api, { profileRoute } from "@/api/axiosConfig";
 import { negotiationRoute } from "@/api/axiosConfig";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -20,7 +20,7 @@ const Negotiations = () => {
   // const [currentTerms, setCurrentTerms] = useState<any[]>([]);
   useEffect(()=>{
     const getNegotiations = async () => {
-      const me = await api.get(`${userRoute}/me`);
+      const me = await api.get(`${profileRoute}`);
       const response = await api.get(`${negotiationRoute}`);
       // setNegotiationData(response.data.negotiations);
       // setCurrentTerms(response.data.currentTerms);
