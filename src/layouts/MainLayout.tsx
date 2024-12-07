@@ -5,10 +5,13 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <SidebarProvider>
-      <Header />
-      <AppSidebar />
+    <>
+      {" "}
+      <SidebarProvider>
+        <Header />
+        <AppSidebar />
         <Outlet />
-    </SidebarProvider>
+      </SidebarProvider>
+    </>
   );
 }

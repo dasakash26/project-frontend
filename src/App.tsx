@@ -17,6 +17,8 @@ import NotFound from "./pages/NotFound.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/Signup.tsx";
 import ContractNegotiationPage from "./pages/NegotiateOffer.tsx";
+import Profile from "./pages/Profile.tsx";
+import OffersPage from "./pages/OffersPage.tsx";
 import EditProfilePage from "./pages/Edit_profile.tsx";
 
 const App = () => {
@@ -29,6 +31,9 @@ const App = () => {
           <Route path="signup" element = {<SignupPage />} />
           <Route path="*" element={<NotFound />}/>
           <Route path= "" element={<Layout />}>
+            <Route path="offer/new" element={<CreateOffer />} />
+            <Route path="offer/all" element={<OffersPage />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="editProfile" element={<EditProfilePage/>} />
             <Route path="search" element={<Search />} />
@@ -41,8 +46,9 @@ const App = () => {
           </>
         )
       );
+  
       return <RouterProvider router={router} />
 }
 
-export default App
 
+export default App;

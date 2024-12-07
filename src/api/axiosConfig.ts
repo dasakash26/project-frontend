@@ -17,6 +17,7 @@ const api = axios.create({
 const offerSearchRoute = "search/offer";
 const createOfferRoute = "offer/create";
 const negotiationRoute = "negotiation";
-const userRoute = "user";
-export { offerSearchRoute, createOfferRoute, negotiationRoute, userRoute };
+const profileRoute = "user/me";
+export { offerSearchRoute, createOfferRoute, negotiationRoute, profileRoute };
+
 export default api;

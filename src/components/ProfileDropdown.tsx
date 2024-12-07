@@ -11,27 +11,24 @@ import { Card } from "./ui/card";
 // import axios from "axios";
 import api from "@/api/axiosConfig";
 import { toast } from "@/hooks/use-toast";
-import { useNavigate, Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 function ProfileDropdown() {
   const navigate = useNavigate();
   const handleLogout = async () => {
-    try{
-      await api.get("/user/logout")
+    try {
+      await api.get("/user/logout");
       toast({
-        title: "Logged out successfully!"
-      })
+        title: "Logged out successfully!",
+      });
       navigate("/login");
-    }
-    catch(error: any){
+    } catch (error: any) {
       toast({
-        title: error.response.data.message
-      })
-      }
-    };
-  
-  
+        title: error.response.data.message,
+      });
+    }
+  };
+
   return (
     <>
       <DropdownMenu>
@@ -43,24 +40,32 @@ function ProfileDropdown() {
         </DropdownMenuTrigger>
         <Card>
           <DropdownMenuContent
-          side="top"
-          className="w-[--radix-popper-anchor-width] bg-[#47663B] shadow-lg rounded-lg p-2"
-        >
-          <Link to="/editProfile">
-          <DropdownMenuItem className="p-2 on text-white rounded-lg">
-            <span>Account</span>
-          </DropdownMenuItem>
-          </Link>
-          <DropdownMenuItem className="p-2 text-white rounded-lg">
-            <span>Payments</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="p-2 text-white rounded-lg">
-            <span>Contracts</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleLogout} className="p-2  text-white rounded-lg">
-            <span>Sign out</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+            side="top"
+            className="w-[--radix-popper-anchor-width] bg-[#47663B] shadow-lg rounded-lg p-2"
+          >
+            <Link to="/profile">
+              <DropdownMenuItem className="p-2 on text-white rounded-lg cursor-pointer">
+                <span>Account</span>
+              </DropdownMenuItem>
+            </Link>
+            <Link to="/offer/all">
+              <DropdownMenuItem className="p-2 on text-white rounded-lg cursor-pointer">
+                <span>Offers</span>
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuItem className="p-2 text-white rounded-lg">
+              <span>Payments</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-2 text-white rounded-lg">
+              <span>Contracts</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="p-2  text-white rounded-lg"
+            >
+              <span>Sign out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
         </Card>
       </DropdownMenu>
     </>
