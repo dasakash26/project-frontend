@@ -71,7 +71,7 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
                 id="harvestTime"
                 name="harvestTime"
                 value={
-                  harvestTime ? harvestTime.toISOString().split("T")[0] : ""
+                  harvestTime ? harvestTime.toString().split("T")[0] : ""
                 }
                 onChange={handleInputChange}
               />

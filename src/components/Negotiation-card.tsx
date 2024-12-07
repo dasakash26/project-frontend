@@ -18,8 +18,10 @@ interface negotiationCard{
 	negotiation: NegotiationDetail;
 	setViewDetail:React.Dispatch<React.SetStateAction<boolean>>;
 	setgetData:React.Dispatch<React.SetStateAction<NegotiationDetail>>;
+	myTurn: boolean;
+	currentTermsId: string;
 }
-export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDetail,setgetData})=>{
+export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDetail,setgetData, myTurn, currentTermsId})=>{
 	const handleClick= ():void =>{
 		setViewDetail(true);
 		setgetData(negotiation);
@@ -30,10 +32,10 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 		<Card className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
 		<CardHeader className="bg-green-100 text-green-800 font-semibold text-lg m-0 py-1">
 			<CardTitle>
-				<div className="flex justify-between">
-					<div className="flex flex-col">
+				<div className="flex justify-between pt-3">
+					<div className="flex flex-col text-2xl">
 						{negotiation.cropName}
-						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id}</p>
+						<CardDescription><p className="my-3 text-black text-3">Negotiation ID :- {negotiation.id.substring(0, 3)}</p>
 						</CardDescription>
 					</div>
 					<div className=" text-black flex items-center gap-5">
@@ -49,9 +51,18 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 			<span className="font-bold"><DetailItem label="Crop" value={negotiation.cropName}/></span>
 			<DetailItem label="Quantity" value={negotiation.quantity}/>
 			{
-				negotiation.ongoing? <DetailItem label="Proposed Price" value={negotiation.proposedPrice}/> :<DetailItem label="Final Price" value={negotiation.finalPrice}/>
+				negotiation.ongoing?
+				
+					<DetailItem label="Proposed Price" value={negotiation.proposedPrice}/> 
+				:
+				(
+				<>
+					<DetailItem label="Negotiation Status" value={negotiation.status}/>
+					<DetailItem label="Final Price" value={negotiation.proposedPrice}/>
+				</>
+				)
+				
 			}
-			<DetailItem label="Negotiation Status" value={negotiation.status}/>
 			<DetailItem label="Harvest Date" value={String(negotiation.harvestTime)}/>
 		</CardContent>
 		<CardFooter>
@@ -59,7 +70,15 @@ export const NegotiationCard:React.FC<negotiationCard>=({negotiation,setViewDeta
 				<Button onClick={
 					handleClick
 				}>View Details</Button>
-				<Link to={`/negotiations/${negotiation.id}`}><Button>Negotiate</Button></Link>
+				{negotiation.ongoing ? (
+            		myTurn ? (
+                		<Link to={`/negotiations/${currentTermsId}`}><Button>Negotiate</Button></Link>
+           		 ) : (
+                		<Button disabled>Waiting for response</Button>
+           		 )
+        		) : (
+            	<Button disabled>Completed</Button>
+        		)}
 			</div>
 		</CardFooter>
 	</Card>

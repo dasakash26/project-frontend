@@ -4,10 +4,12 @@ import { NegotiationCard } from "@/components/Negotiation-card";
 import { NegotiationPreview } from "@/components/NegotiationPreview";
 import { NegotiationDetail } from "@/components/utils/types";
 // import { negotiationData } from "@/components/utils/data/NegotiationData";
-import api from "@/api/axiosConfig";
+import api, { userRoute } from "@/api/axiosConfig";
 import { negotiationRoute } from "@/api/axiosConfig";
+import { Toaster } from "@/components/ui/toaster";
 
 const Negotiations = () => {
+  // const [ myTurn, setMyTurn] = useState(true);
   const [showONgoing, setShowOngoing] = useState(true);
   const [ViewDetail,setViewDetail] = useState(false);
   const [getData,setgetData] = useState<NegotiationDetail> ();
@@ -18,6 +20,7 @@ const Negotiations = () => {
   // const [currentTerms, setCurrentTerms] = useState<any[]>([]);
   useEffect(()=>{
     const getNegotiations = async () => {
+      const me = await api.get(`${userRoute}/me`);
       const response = await api.get(`${negotiationRoute}`);
       // setNegotiationData(response.data.negotiations);
       // setCurrentTerms(response.data.currentTerms);
@@ -25,7 +28,10 @@ const Negotiations = () => {
       response.data.negotiations.forEach((item: any) => {
         response.data.currentTerms.forEach((term: any) => {
           if(item.currentTermsId === term.id){
-            res.push({...term, id: item.id, buyerName: "Buyer Name", ongoing: item.ongoing, proposedPrice: term.price});
+            let myTurn: boolean;
+            if(item.turn === me.data.user.id) myTurn = true;
+            else myTurn = false;
+            res.push({...term, id: item.id, buyerName: "Name", ongoing: item.ongoing, proposedPrice: term.price, myTurn: myTurn, currentTermsId: item.currentTermsId, status: item.status});
           }
         })
       })
@@ -36,6 +42,7 @@ const Negotiations = () => {
     getNegotiations();
   },[])
   return (
+    <>
     <div className=" w-full  mt-6 bg-gradient-to-br from-white to-[#c8ffcc] pt-16">
       <h1 className="text-3xl text-green-800 text-center font-bold  mb-2">
         Negotiations
@@ -62,7 +69,7 @@ const Negotiations = () => {
             showONgoing? negotiationData.map(
               (item)=>(
                 //@ts-ignore
-                item.ongoing && <NegotiationCard key ={item.id} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData}/>
+                item.ongoing && <NegotiationCard key ={item.id} negotiation={item} setViewDetail={setViewDetail} setgetData={setgetData} myTurn={item.myTurn} currentTermsId={item.currentTermsId}/>
               )) :
               negotiationData.map(
                 (item)=>(
@@ -74,6 +81,8 @@ const Negotiations = () => {
         </div>
       }
     </div>
+    <Toaster />
+    </>
   )
 }
 
