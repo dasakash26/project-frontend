@@ -17,33 +17,37 @@ import NotFound from "./pages/NotFound.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import SignupPage from "./pages/Signup.tsx";
 import ContractNegotiationPage from "./pages/NegotiateOffer.tsx";
-import Profile from "./pages/profile.tsx";
+import Profile from "./pages/Profile.tsx";
+import OffersPage from "./pages/OffersPage.tsx";
 
 const App = () => {
-    const router = createBrowserRouter(
-        createRoutesFromElements(
-          <>
-          {/* Routes are error prone, pay attention */}
-          <Route path= "/" element={<LandingPage />} />
-          <Route path="/login" element = {<LoginPage />} />
-          <Route path="/signup" element = {<SignupPage />} />
-          
-          <Route path= "/" element={<Layout />}>
-            <Route path="user" element={<Profile />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="search" element={<Search />} />
-            <Route path="create-offer" element={<CreateOffer />} />
-            <Route path="negotiations" element={<Negotiations />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="notifications" element={<Notification />} />
-            <Route path="negotiations/:negotiationID" element={<ContractNegotiationPage />} />
-          </Route>
-          <Route path="*" element={<NotFound />}/>
-          </>
-        )
-      );
-      return <RouterProvider router={router} />
-}
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        {/* Routes are error prone, pay attention */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
 
-export default App
+        <Route path="/" element={<Layout />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="search" element={<Search />} />
+          <Route path="offer/new" element={<CreateOffer />} />
+          <Route path="offer/all" element={<OffersPage />} />
+          <Route path="negotiations" element={<Negotiations />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="notifications" element={<Notification />} />
+          <Route
+            path="negotiations/:negotiationID"
+            element={<ContractNegotiationPage />}
+          />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </>
+    )
+  );
+  return <RouterProvider router={router} />;
+};
 
+export default App;

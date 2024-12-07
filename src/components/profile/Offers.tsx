@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { PlusCircle, ChevronDown, ChevronUp } from 'lucide-react'
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 interface Offer {
-  title: string
-  date: string
-  status: "Negotiation" | "Finalized" | "Completed"
-  price: string
+  title: string;
+  date: string;
+  status: "Negotiation" | "Finalized" | "Completed";
+  price: string;
 }
 
 export function Offers() {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
   const offers: Offer[] = [
     {
       title: "Organic Tomatoes",
@@ -62,22 +63,34 @@ export function Offers() {
       status: "Completed",
       price: "$1.75/kg",
     },
-  ]
+  ];
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Active Offers</CardTitle>
-        <Button>
-          <PlusCircle className="w-4 h-4 mr-2" />
-          Create Offer
-        </Button>
+        <div className="flex gap-2">
+          <Link to="/offer/new">
+            <Button>
+              <PlusCircle className="mr-2" />
+              Create Offer
+            </Button>
+          </Link>
+          <Link to="/offer/all">
+            <Button className="text-center" variant={"secondary"}>
+              View
+              <ChevronRight className="mr-2" />
+            </Button>
+          </Link>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {offers.slice(0, isExpanded ? offers.length : 4).map((offer, index) => (
-            <OfferItem key={index} offer={offer} />
-          ))}
+          {offers
+            .slice(0, isExpanded ? offers.length : 4)
+            .map((offer, index) => (
+              <OfferItem key={index} offer={offer} />
+            ))}
         </div>
         {offers.length > 3 && (
           <ExpandButton
@@ -88,7 +101,7 @@ export function Offers() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function OfferItem({ offer }: { offer: Offer }) {
@@ -110,10 +123,18 @@ function OfferItem({ offer }: { offer: Offer }) {
         <p className="text-sm font-medium">{offer.price}</p>
       </div>
     </div>
-  )
+  );
 }
 
-function ExpandButton({ isExpanded, onClick, className }: { isExpanded: boolean; onClick: () => void; className?: string }) {
+function ExpandButton({
+  isExpanded,
+  onClick,
+  className,
+}: {
+  isExpanded: boolean;
+  onClick: () => void;
+  className?: string;
+}) {
   return (
     <Button
       variant="ghost"
@@ -132,6 +153,5 @@ function ExpandButton({ isExpanded, onClick, className }: { isExpanded: boolean;
         </>
       )}
     </Button>
-  )
+  );
 }
-

@@ -89,7 +89,7 @@ function LoadingSkeleton() {
 
 function ErrorAlert({ message }: { message: string }) {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-20">
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>Error</AlertTitle>

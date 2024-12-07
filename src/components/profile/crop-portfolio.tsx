@@ -39,10 +39,10 @@ export function CropPortfolio() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-4xl mx-auto">
       <Card className="md:h-[34rem] md:w-[40rem]">
         <CardContent className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Current Crops</h3>
+          <h3 className="text-lg font-semibold my-4">Current Crops</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {currentCrops.map((crop, index) => (
               <div key={index} className="p-4 border rounded-lg">
@@ -57,7 +57,7 @@ export function CropPortfolio() {
               </div>
             ))}
           </div>
-          <h3 className="text-lg font-semibold mb-4">Past Crops</h3>
+          <h3 className="text-lg font-semibold my -4">Past Crops</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {pastCrops.map((crop, index) => (
               <div key={index} className="p-4 border rounded-lg">

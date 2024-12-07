@@ -36,7 +36,7 @@ const items = [
   },
   {
     title: "Create Offer",
-    url: "/create-offer",
+    url: "/offer/new",
     icon: HandCoinsIcon,
   },
   {

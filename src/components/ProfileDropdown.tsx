@@ -43,9 +43,14 @@ function ProfileDropdown() {
             side="top"
             className="w-[--radix-popper-anchor-width] bg-[#47663B] shadow-lg rounded-lg p-2"
           >
-            <Link to="/user">
+            <Link to="/profile">
               <DropdownMenuItem className="p-2 on text-white rounded-lg cursor-pointer">
                 <span>Account</span>
+              </DropdownMenuItem>
+            </Link>
+            <Link to="/offer/all">
+              <DropdownMenuItem className="p-2 on text-white rounded-lg cursor-pointer">
+                <span>Offers</span>
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem className="p-2 text-white rounded-lg">
