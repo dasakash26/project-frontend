@@ -8,6 +8,7 @@ import { Wheat, FileText, MessageSquare, DollarSign, Calendar, Send, Check, X, M
 import api, { negotiationRoute } from '@/api/axiosConfig';
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const ContractNegotiationPage = () => {
   const [counterOffer, setCounterOffer] = useState({
@@ -40,6 +41,9 @@ const navigate = useNavigate();
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCounterOffer({ ...counterOffer, [e.target.name]: e.target.value })
+  }
+  const handleSelectChange = (value: string) => {
+    setCounterOffer({ ...counterOffer, paymentTerms: value })
   }
 
   const handleCounterOffer = async () => {
@@ -197,14 +201,17 @@ const navigate = useNavigate();
                 <MapPin className="absolute left-2 top-3 h-5 w-5 text-green-500" />
               </div>
               <div className="relative">
-                <Input
-                  id="paymentTerms"
-                  name="paymentTerms"
-                  value={counterOffer.paymentTerms}
-                  onChange={handleInputChange}
-                  className="peer pl-8 border-b border-green-300 focus:border-green-500 transition-all"
-                  placeholder=" "
-                />
+              <Select onValueChange={handleSelectChange}>
+                  <SelectTrigger className="w-full pl-8 border-b border-green-300 focus:border-green-500 transition-all">
+                    <SelectValue placeholder="Select payment terms" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="one-time">One-time payment</SelectItem>
+                    <SelectItem value="installments">Installments</SelectItem>
+                    <SelectItem value="on-delivery">Payment on delivery</SelectItem>
+                    <SelectItem value="advance">Advance payment</SelectItem>
+                  </SelectContent>
+                </Select>
                 <Label htmlFor="paymentTerms" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
                   Payment Terms
                 </Label>

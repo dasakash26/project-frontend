@@ -145,6 +145,7 @@ export default function CreateOffer() {
               <OfferDetailsStep
                 offerDetails={offerDetails}
                 handleInputChange={handleInputChange}
+                handleSelectChange={handleSelectChange}
               />
             )}
 
