@@ -90,8 +90,8 @@ export default function CreateOffer() {
     } catch (error: any) {
       // console.error("Failed to submit offer:", error);
       toast({
-        title: error.response?.data?.message || "Something went wrong!"
-      })
+        title: error.response?.data?.message || "Something went wrong!",
+      });
       console.log(offerDetails);
     } finally {
       setIsSubmitting(false);
@@ -199,7 +199,7 @@ export default function CreateOffer() {
           )}
         </Card>
       </div>
-    <Toaster />
+      <Toaster />
     </>
   );
 }

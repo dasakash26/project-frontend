@@ -19,14 +19,13 @@ import SignupPage from "./pages/Signup.tsx";
 import ContractNegotiationPage from "./pages/NegotiateOffer.tsx";
 import Profile from "./pages/Profile.tsx";
 import OffersPage from "./pages/OffersPage.tsx";
-import EditProfilePage from "./pages/Edit_profile.tsx";
+import EditProfilePage from "./pages/EditProfile.tsx";
 import SignupPagePDF from "./pages/test.tsx";
 
 const App = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
           <>
-          {/* Routes are error prone, pay attention */}
           <Route path= "/" element={<LandingPage />} />
           <Route path= "/test" element={<SignupPagePDF />} />
           <Route path="login" element = {<LoginPage />} />
@@ -36,8 +35,8 @@ const App = () => {
             <Route path="offer/new" element={<CreateOffer />} />
             <Route path="offer/all" element={<OffersPage />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="profile/edit" element={<EditProfilePage/>} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="editProfile" element={<EditProfilePage/>} />
             <Route path="search" element={<Search />} />
             <Route path="create-offer" element={<CreateOffer />} />
             <Route path="negotiations" element={<Negotiations />} />

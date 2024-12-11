@@ -1,16 +1,44 @@
+import api, { profileRoute } from "@/api/axiosConfig";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 // import { ScrollArea } from "@/components/ui/scroll-area"
-import { GrapeIcon as Grain, MapPin, ChevronRight } from "lucide-react"; //User
+import {
+  GrapeIcon as Grain,
+  MapPin,
+  ChevronRight,
+  IndianRupee,
+} from "lucide-react"; //User
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function FarmerDashboard() {
-  const farmerData = {
-    name: "Akash Das",
-    location: "Purulia, West Bengal",
-    crops: ["Paddy", "Mustard", "Potato"],
+  const [farmerData, setFarmerData] = useState({
+    name: "user",
+    location: "unknown",
+    crops: [""],
     avatar: "/placeholder.svg?height=40&width=40",
-  };
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await api.get(profileRoute);
+        setFarmerData(response.data.user);
+        setFarmerData((prev) => ({
+          ...prev,
+          // crops: prev.crops[0].split(","),
+        }));
+        console.log(
+          "User data fetched successfully:",
+          response.data.user.crops
+        );
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   const negotiations = [
     { buyerName: "ABC Corp", crop: "Wheat", priceOffered: "$0.5/kg" },
@@ -68,12 +96,11 @@ export default function FarmerDashboard() {
                     {farmerData.name}
                   </h2>
                   <p className="text-base flex items-center gap-2 text-gray-600 mt-1">
-                    <MapPin className="h-5 w-5 text-emerald-600" />{" "}
-                    {farmerData.location}
+                    <MapPin className="h-5 w-5 text-emerald-600" /> {"hydrabad"}
                   </p>
                 </div>
                 <div className="flex gap-3 flex-wrap">
-                  {farmerData.crops.map((crop, i) => (
+                  {farmerData.crops?.map((crop, i) => (
                     <span
                       key={i}
                       className="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm font-medium rounded-full border border-emerald-100"
@@ -83,21 +110,28 @@ export default function FarmerDashboard() {
                   ))}
                 </div>
                 <div className="flex gap-4 mt-4">
-                  <Button className="hover:bg-accent text-white">
-                    Edit Profile
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
-                  >
-                    View Analytics
-                  </Button>
+                  <Link to="/profile/edit">
+                    <Button className="hover:bg-accent text-white">
+                      Edit Profile
+                    </Button>
+                  </Link>
+                  <Link to="/profile">
+                    <Button
+                      variant="outline"
+                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
+                    >
+                      View Analytics
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="hidden lg:block border-l border-gray-200 pl-6 ml-6 space-y-3">
                 <div className="space-y-1">
                   <p className="text-sm text-gray-500">Total Revenue</p>
-                  <p className="text-2xl font-bold text-emerald-600">$24,500</p>
+                  <p className="text-2xl font-bold text-emerald-600 flex items-center">
+                    <IndianRupee />
+                    24,500
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-gray-500">Active Contracts</p>
