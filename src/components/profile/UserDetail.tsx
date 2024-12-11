@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Star, MapPin, Phone, Mail, Edit, Calendar, Briefcase } from 'lucide-react'
 import { Separator } from "@/components/ui/separator"
 import { User } from "../utils/types"
+import { Link } from "react-router-dom"
 
 interface UserDetailProps {
   user: User
@@ -13,20 +14,20 @@ interface UserDetailProps {
 export function UserDetail({ user }: UserDetailProps) {
   const rating = 4; // Example rating
   const crops = ['Tomatoes', 'Cucumbers', 'Peppers'];
-
+  const date = new Date(user.createdAt);
   return (
     <Card className="bg-card">
       <CardContent className="p-6 space-y-6">
         {/* Profile Header */}
         <div className="flex flex-col items-center text-center space-y-4">
           <Avatar className="h-24 w-24 border-2 border-primary">
-            <AvatarImage src="https://hips.hearstapps.com/hmg-prod/images/ana-de-armas-1626771511.jpg?crop=0.6923333333333334xw:1xh;center,top&resize=640:*" alt={user.name} />
+            <AvatarImage src="https://hips.earstapps.com/hmg-prod/images/ana-de-armas-1626771511.jpg?crop=0.6923333333333334xw:1xh;center,top&resize=640:*" alt={user.name} />
             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold">{user.name}</h2>
             <p className="text-muted-foreground">{user.email}</p>
-            <Badge variant="secondary" className="text-xs">farmer</Badge>
+            <Badge variant="secondary" className="text-xs">{user.role}</Badge>
           </div>
           <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, i) => (
@@ -38,10 +39,12 @@ export function UserDetail({ user }: UserDetailProps) {
               />
             ))}
           </div>
+          <Link to="/profile/edit"  className="w-full">
           <Button className="w-full" variant="outline">
             <Edit className="mr-2 h-4 w-4" />
             Edit Profile
           </Button>
+          </Link>
         </div>
 
         <Separator />
@@ -54,7 +57,7 @@ export function UserDetail({ user }: UserDetailProps) {
           </div>
           <div className="flex items-center text-muted-foreground">
             <Calendar className="mr-2 h-4 w-4" />
-            <span>Member since: 12/2/2024</span>
+            <span>Member since: {date.toLocaleDateString()}</span>
           </div>
           <div className="flex items-center text-muted-foreground">
             <Briefcase className="mr-2 h-4 w-4" />
