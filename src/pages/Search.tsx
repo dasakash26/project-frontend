@@ -18,6 +18,7 @@ import { OfferPreview } from "@/components/OfferPreview";
 import { SearchBar } from "@/components/SearchBar";
 import { Filters } from "@/components/Filters";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 interface Offer {
   id: string;
@@ -45,6 +46,7 @@ export default function SearchPage() {
   const [maxPrice, setMaxPrice] = useState(100);
   //sort state
   const [sortBy, setSortBy] = useState("newest");
+  const navigate = useNavigate();
   //view details state
   const [viewDetails, setViewDetails] = useState(false);
   const [offerDetails, setOfferDetails] = useState<OfferDetails | null>(null);
@@ -142,6 +144,7 @@ export default function SearchPage() {
         title: "Negotiation Started",
         description: "Negotiation with the seller has been started",
       });
+      navigate("/negotiations")
     } catch (error) {
       toast({
         title: "Cannot create negotiation",
