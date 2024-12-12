@@ -15,8 +15,7 @@ interface OfferPreviewProps {
   resetForm?: () => void;
 }
 
-
-export const Offer : React.FC<OfferPreviewProps> = ({offerDetails})=>{
+export const Offer: React.FC<OfferPreviewProps> = ({ offerDetails }) => {
   const {
     cropName = "Not specified",
     cropType = "Not specified",
@@ -27,11 +26,11 @@ export const Offer : React.FC<OfferPreviewProps> = ({offerDetails})=>{
     paymentTerms = "Not specified",
     description = cropName,
   } = offerDetails || {};
-  const date=harvestTime?new Date(harvestTime) : null;
+  const date = harvestTime ? new Date(harvestTime) : null;
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <DetailSection
           title="Crop Information"
           icon={<Wheat className="w-5 h-5 " />}
@@ -96,4 +95,4 @@ export const Offer : React.FC<OfferPreviewProps> = ({offerDetails})=>{
       </DetailSection>
     </>
   );
-}
+};

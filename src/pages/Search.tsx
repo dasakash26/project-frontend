@@ -18,6 +18,7 @@ import { OfferPreview } from "@/components/OfferPreview";
 import { SearchBar } from "@/components/SearchBar";
 import { Filters } from "@/components/Filters";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 interface Offer {
   id: string;
   cropName: string;
@@ -109,8 +110,17 @@ export default function SearchPage() {
         cropName: searchQuery,
       });
       const result = await api.get(`${offerSearchRoute}?${params}`);
-      setOffers(result.data.offers);
-      setVisibleOffers(result.data.offers);
+      if (result.data.offers) {
+        setOffers(result.data.offers);
+        setVisibleOffers(result.data.offers);
+      } else {
+        setOffers([]);
+        setVisibleOffers([]);
+        toast({
+          title: "No offers found",
+          description: result.data.message,
+        });
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       toast({
@@ -126,11 +136,11 @@ export default function SearchPage() {
 
   const handleNegotiate = async () => {
     // await new Promise((resolve) => setTimeout(resolve, 1000));
-    try{
+    try {
       await api.post(`${negotiationRoute}/create`, offerDetails);
-    toast({
-      title: "Negotiation Started",
-      description: "Negotiation with the seller has been started",
+      toast({
+        title: "Negotiation Started",
+        description: "Negotiation with the seller has been started",
       });
     } catch (error) {
       toast({
@@ -143,15 +153,22 @@ export default function SearchPage() {
   };
 
   return viewDetails ? (
-    <div className="mt-16 mx-auto">
-      <OfferPreview
-        offerDetails={offerDetails!}
-        resetForm={() => setViewDetails(false)}
-      />
-      <Button className="w-full" variant="outline" onClick={handleNegotiate}>
-        Negotiate
-      </Button>
-      <Toaster />
+    <div className="py-20 mx-auto w-[50rem]">
+      <Card>
+        <OfferPreview
+          offerDetails={offerDetails!}
+          resetForm={() => setViewDetails(false)}
+        />
+        <div className="flex items-center justify-center">
+          <Button
+            className="w-fit min-w-52 mb-10 p-6"
+            onClick={handleNegotiate}
+          >
+            Negotiate
+          </Button>
+        </div>
+        <Toaster />
+      </Card>
     </div>
   ) : (
     <div className="min-h-screen bg-gradient-to-br from-white to-[#e8f5e9] m-auto mt-16">
@@ -207,7 +224,7 @@ export default function SearchPage() {
               </div>
             )}
 
-            <div className="grid md:grid-cols-2 gap-4 auto-rows-max">
+            <div className="grid md:grid-cols-3 gap-4 auto-rows-max">
               {visibleOffers.map((offer) => (
                 <OfferCard
                   key={offer.id}

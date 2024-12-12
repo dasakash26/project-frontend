@@ -46,7 +46,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, setViewDetails, setOfferDe
   return (
     <>
     <Card className="w-full max-w-sm overflow-hidden transition-shadow duration-300 hover:shadow-lg">
-      <CardContent className="p-6">
+      <CardContent className="p-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold text-primary">{offer.cropName}</h2>
           <Badge variant="secondary" className="text-xs font-semibold px-2 py-1">

@@ -49,7 +49,7 @@ const Negotiations = () => {
       </h1>
 
       <h3 className="text-1xl text-green-800 text-center  mb-2">You will see all your negotiations here</h3>
-      <div className="flex space-x-9 mb-6 mx-5">
+      <div className="flex space-x-2 mb-6 mx-5">
       <Button 
       // className="bg-green-900 font-bold"
       onClick={()=>setShowOngoing(true)}

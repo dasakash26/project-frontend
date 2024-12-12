@@ -8,7 +8,7 @@ interface DetailSectionProps {
 
 function DetailSection({ title, icon, children }: DetailSectionProps) {
   return (
-    <div className="border-x-2 rounded-lg p-4 transition-all hover:bg-secondary">
+    <div className="border-2 rounded-lg p-4 transition-all hover:bg-secondary">
       <div className="flex items-center gap-2 mb-4">
         {icon}
         <h3 className="font-medium">{title}</h3>
