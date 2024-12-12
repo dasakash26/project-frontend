@@ -25,6 +25,7 @@ export const Offer: React.FC<OfferPreviewProps> = ({ offerDetails }) => {
     location = "Not specified",
     paymentTerms = "Not specified",
     description = cropName,
+    logistics = "Not specified",
   } = offerDetails || {};
   const date = harvestTime ? new Date(harvestTime) : null;
 
@@ -78,6 +79,7 @@ export const Offer: React.FC<OfferPreviewProps> = ({ offerDetails }) => {
           icon={<Scale className="w-5 h-5" />}
         >
           <DetailItem label="Payment Terms" value={paymentTerms} />
+          <DetailItem label="Logistical preference" value={logistics} />
         </DetailSection>
       </div>
 

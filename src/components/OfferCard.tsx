@@ -5,6 +5,7 @@ import { IndianRupee, Wheat, MapPin, Calendar } from 'lucide-react';
 // import { Toaster } from '@/components/ui/toaster';
 // import { useToast } from "@/hooks/use-toast";
 import { OfferDetails } from "./utils/types";
+import { useEffect } from "react";
 
 interface OfferCardProps {
   // offer?: {
@@ -30,6 +31,13 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, setViewDetails, setOfferDe
       </Card>
     );
   }
+  
+  useEffect(() => {
+    const getCount = async () => {
+      const count = await new Promise((res) => {setTimeout(res, 1000)});
+    }
+    getCount();
+  }, []);
   
   const handleViewDetails = () => {
     setViewDetails(true);

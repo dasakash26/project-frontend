@@ -32,7 +32,6 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
     harvestTime,
     location,
     offerDuration,
-    paymentTerms,
   } = offerDetails || {};
 
   return (
@@ -108,10 +107,11 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
             </div>
             {/*  paymentTerms */}
             <div className="flex flex-col space-y-1.5">
+            <Label htmlFor="paymentTerms">Payment Terms</Label>
             <Select onValueChange={(value) => {
               handleSelectChange("paymentTerms", value);
             }}>
-                  <SelectTrigger className="w-full pl-8 border-b border-green-300 focus:border-green-500 transition-all">
+                  <SelectTrigger className="w-full pl-8 border-b transition-all">
                     <SelectValue placeholder="Select payment terms" />
                   </SelectTrigger>
                   <SelectContent>
@@ -121,9 +121,23 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
                     <SelectItem value="advance">Advance payment</SelectItem>
                   </SelectContent>
                 </Select>
-                <Label htmlFor="paymentTerms" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
-                  Payment Terms
-                </Label>
+                <CreditCard className="absolute left-2 top-3 h-5 w-5 text-green-500" />
+            </div>
+            {/*  Logistics */}
+            <div className="flex flex-col space-y-1.5">
+            <Label htmlFor="logistics">Logistical preference</Label>
+            <Select onValueChange={(value) => {
+              handleSelectChange("logistics", value);
+            }}>
+                  <SelectTrigger className="w-full pl-8 border-b transition-all">
+                    <SelectValue placeholder="Select logistics preference" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="one-time">Arranged by farmer</SelectItem>
+                    <SelectItem value="installments">Arranged by buyer</SelectItem>
+                    <SelectItem value="on-delivery">Arranged by AgriPact</SelectItem>
+                  </SelectContent>
+                </Select>
                 <CreditCard className="absolute left-2 top-3 h-5 w-5 text-green-500" />
             </div>
           </div>
