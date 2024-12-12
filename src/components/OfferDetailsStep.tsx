@@ -35,6 +35,13 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
     paymentTerms,
   } = offerDetails || {};
 
+  const paymentTermsOptions = [
+    { value: "one-time", label: "One-time Payment" },
+    { value: "two-time", label: "Two Installments" },
+    { value: "three-time", label: "Three Installments" },
+    { value: "four-time", label: "Four Installments" },
+  ];
+
   return (
     <>
       <CardHeader className="border-b border-[#2a2f2a]">
@@ -108,23 +115,28 @@ export const OfferDetailsStep: React.FC<OfferDetailsStepProps> = ({
             </div>
             {/*  paymentTerms */}
             <div className="flex flex-col space-y-1.5">
-            <Select onValueChange={(value) => {
-              handleSelectChange("paymentTerms", value);
-            }}>
-                  <SelectTrigger className="w-full pl-8 border-b border-green-300 focus:border-green-500 transition-all">
-                    <SelectValue placeholder="Select payment terms" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="one-time">One-time payment</SelectItem>
-                    <SelectItem value="installments">Installments</SelectItem>
-                    <SelectItem value="on-delivery">Payment on delivery</SelectItem>
-                    <SelectItem value="advance">Advance payment</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Label htmlFor="paymentTerms" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
-                  Payment Terms
-                </Label>
-                <CreditCard className="absolute left-2 top-3 h-5 w-5 text-green-500" />
+              <Label htmlFor="paymentTerms">Payment Terms</Label>
+              <Select
+                value={paymentTerms || paymentTermsOptions[0].value}
+                onValueChange={(value) => {
+                  handleSelectChange("paymentTerms", value);
+                }}
+              >
+                <SelectTrigger className="w-full pl-8 border-b border-green-300 focus:border-green-500 transition-all">
+                  <SelectValue placeholder="Select payment terms" />
+                </SelectTrigger>
+                <SelectContent>
+                  {paymentTermsOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Label htmlFor="paymentTerms" className="absolute left-8 top-2 text-gray-500 transition-all peer-focus:text-xs peer-focus:-top-4 peer-focus:text-green-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-green-500">
+                Payment Terms
+              </Label>
+              <CreditCard className="absolute left-2 top-3 h-5 w-5 text-green-500" />
             </div>
           </div>
         </form>

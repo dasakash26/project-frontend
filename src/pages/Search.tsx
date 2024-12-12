@@ -7,7 +7,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import api, { offerSearchRoute, negotiationRoute } from "@/api/axiosConfig";
+import api, {
+  offerSearchRoute,
+  negotiationRoute,
+  initOfferRoute,
+} from "@/api/axiosConfig";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import OfferCard from "@/components/OfferCard";
@@ -19,6 +23,8 @@ import { SearchBar } from "@/components/SearchBar";
 import { Filters } from "@/components/Filters";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Flame } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 interface Offer {
   id: string;
   cropName: string;
@@ -48,12 +54,34 @@ export default function SearchPage() {
   //view details state
   const [viewDetails, setViewDetails] = useState(false);
   const [offerDetails, setOfferDetails] = useState<OfferDetails | null>(null);
+  const [initOffers, setInitOffers] = useState<Offer[]>([]);
   const { toast } = useToast();
   const filterByCropType = (e: string) => {
     setCropType(e);
     const filtered = offers.filter((offer) => offer.cropType === e);
     setVisibleOffers(filtered);
   };
+  //get all offers at first render
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        setIsLoading(true);
+        const result = await api.get(initOfferRoute);
+        setInitOffers(result.data.offers);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast({
+          title: "Error fetching data",
+          description:
+            error instanceof Error ? error.message : "Something went wrong",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchOffers();
+  }, []);
 
   const filterByPrice = (e: number[]) => {
     setPriceRange(e);
@@ -113,6 +141,12 @@ export default function SearchPage() {
       if (result.data.offers) {
         setOffers(result.data.offers);
         setVisibleOffers(result.data.offers);
+        if (result.data.message) {
+          toast({
+            title: "No exact offers found",
+            description: result.data.message,
+          });
+        }
       } else {
         setOffers([]);
         setVisibleOffers([]);
@@ -197,7 +231,7 @@ export default function SearchPage() {
                 resetFilters={resetFilters}
               />
             ) : (
-              <div className="w-10"></div>
+              <div className=""></div>
             )
           }
           <div className="lg:col-span-9 space-y-6">
@@ -223,8 +257,19 @@ export default function SearchPage() {
                 </Badge>
               </div>
             )}
+            {offers.length == 0 &&<> <h1 className="flex gap-4 font-semibold text-2xl"><Flame/>Crops in Demand</h1><Separator/></>}
+            <div className="grid md:grid-cols-3 gap-6 auto-rows-max">
+              {/* //render init offers conditionally */}
 
-            <div className="grid md:grid-cols-3 gap-4 auto-rows-max">
+              {offers.length == 0 &&
+                initOffers.map((offer) => (
+                  <OfferCard
+                    key={offer.id}
+                    offer={offer}
+                    setViewDetails={setViewDetails}
+                    setOfferDetails={setOfferDetails}
+                  />
+                ))}
               {visibleOffers.map((offer) => (
                 <OfferCard
                   key={offer.id}
