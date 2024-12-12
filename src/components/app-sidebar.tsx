@@ -45,6 +45,11 @@ const items = [
     icon: Handshake,
   },
   {
+    title: "Contracts",
+    url: "/contracts",
+    icon: Handshake,
+  },
+  {
     title: "Settings",
     url: "/settings",
     icon: Settings,

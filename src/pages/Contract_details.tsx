@@ -71,7 +71,7 @@ export const ContractDetailsPage : React.FC<ContractData>= (contractData) =>{
             <div className="flex items-center gap-4">
               <Avatar>
                 <AvatarImage src={contractData.buyerImage} alt={contractData.buyerName} />
-                <AvatarFallback>{contractData.buyerName.charAt(0)}</AvatarFallback>
+                {/* <AvatarFallback>{contractData.buyerName.charAt(0)}</AvatarFallback> */}
               </Avatar>
               <div>
                 <h3 className="font-semibold">{contractData.buyerName}</h3>
@@ -82,7 +82,7 @@ export const ContractDetailsPage : React.FC<ContractData>= (contractData) =>{
             <div className="flex items-center gap-4">
               <Avatar>
                 <AvatarImage src={contractData.farmerImage} alt={contractData.farmerName} />
-                <AvatarFallback>{contractData.farmerName.charAt(0)}</AvatarFallback>
+                {/* <AvatarFallback>{contractData.farmerName.charAt(0)}</AvatarFallback> */}
               </Avatar>
               <div>
                 <h3 className="font-semibold">{contractData.farmerName}</h3>

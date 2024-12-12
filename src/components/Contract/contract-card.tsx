@@ -2,7 +2,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-// import Link from 'next/link'
+import { Link } from "react-router-dom"
 
 interface ContractCardProps {
   contract: {
@@ -52,7 +52,7 @@ export function ContractCard({ contract }: ContractCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Link href={`/contracts/${contract.id}`} className="w-full">
+        <Link to={`/contracts/${contract.id}`} className="w-full">
           <Button className="w-full">View Details</Button>
         </Link>
       </CardFooter>

@@ -7,7 +7,7 @@ interface ContractOverviewProps {
     quantity: string
     price: string
     paymentTerms: string
-    deliveryDate: string
+    deliveryDate?: string
   }
 }
 

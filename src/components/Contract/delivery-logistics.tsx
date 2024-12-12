@@ -4,7 +4,7 @@ import { CheckCircle2, Circle, Truck } from 'lucide-react'
 interface DeliveryLogisticsProps {
   contract: {
     deliveryStatus: string
-    deliveryDate: string
+    deliveryDate?: string
     trackingId: string
   }
 }
