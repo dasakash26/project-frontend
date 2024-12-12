@@ -31,7 +31,7 @@ const Negotiations = () => {
             let myTurn: boolean;
             if(item.turn === me.data.user.id) myTurn = true;
             else myTurn = false;
-            res.push({...term, id: item.id, buyerName: "Name", ongoing: item.ongoing, proposedPrice: term.price, myTurn: myTurn, currentTermsId: item.currentTermsId, status: item.status});
+            res.push({...term, id: item.id, buyerName: item.name, ongoing: item.ongoing, proposedPrice: term.price, myTurn: myTurn, currentTermsId: item.currentTermsId, status: item.status});
           }
         })
       })

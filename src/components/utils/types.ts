@@ -30,6 +30,7 @@ export interface OfferDetails {
   offerDuration: string; // Duration of the offer
   paymentTerms: string; // Terms for payment
   seasonality?: string; // Seasonality info (optional)
+  logistics?: string; // Logistics
 }
 
 export interface NegotiationDetail extends OfferDetails {
