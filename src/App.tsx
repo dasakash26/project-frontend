@@ -21,6 +21,7 @@ import Profile from "./pages/Profile.tsx";
 import OffersPage from "./pages/OffersPage.tsx";
 import EditProfilePage from "./pages/EditProfile.tsx";
 import SignupPagePDF from "./pages/test.tsx";
+import Notifications from "./pages/Notifications.tsx";
 
 const App = () => {
     const router = createBrowserRouter(
@@ -32,6 +33,8 @@ const App = () => {
           <Route path="signup" element = {<SignupPage />} />
           <Route path="*" element={<NotFound />}/>
           <Route path= "" element={<Layout />}>
+            //notifications
+            <Route path="notifications" element={<Notifications/>} />
             <Route path="offer/new" element={<CreateOffer />} />
             <Route path="offer/all" element={<OffersPage />} />
             <Route path="profile" element={<Profile />} />
