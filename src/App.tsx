@@ -29,19 +29,18 @@ const App = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
           <>
-          <Route path= "/" element={<LandingPage />} />
+          <Route path= "/agripact" element={<LandingPage />} />
           <Route path= "/test" element={<SignupPagePDF />} />
           <Route path="login" element = {<LoginPage />} />
           <Route path="signup" element = {<SignupPage />} />
           <Route path="*" element={<NotFound />}/>
           <Route path= "" element={<Layout />}>
-            //notifications
             <Route path="notifications" element={<Notifications/>} />
             <Route path="offer/new" element={<CreateOffer />} />
             <Route path="offer/all" element={<OffersPage />} />
             <Route path="profile" element={<Profile />} />
             <Route path="profile/edit" element={<EditProfilePage/>} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="search" element={<Search />} />
             <Route path="create-offer" element={<CreateOffer />} />
             <Route path="negotiations" element={<Negotiations />} />

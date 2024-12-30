@@ -65,7 +65,7 @@ const SignupPage = () => {
       toast({
         title: res.data.message,
       });
-      navigate("/login");
+      navigate("/");
     } catch (error: any) {
       toast({
         title: error.response?.data?.message || "Something went wrong!",

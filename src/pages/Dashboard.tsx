@@ -10,9 +10,10 @@ import {
   IndianRupee,
 } from "lucide-react"; //User
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function FarmerDashboard() {
+  const navigate = useNavigate();
   const [farmerData, setFarmerData] = useState({
     name: "user",
     location: "unknown",
@@ -34,6 +35,7 @@ export default function FarmerDashboard() {
           response.data.user.crops
         );
       } catch (error) {
+        navigate("/agripact");
         console.error("Error fetching user data:", error);
       }
     };
